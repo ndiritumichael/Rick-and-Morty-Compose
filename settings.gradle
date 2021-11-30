@@ -1,0 +1,16 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+rootProject.name = "Rick-and-Morty-Compose"
+include ':app'
+include ':data:network'
+include ':common'
+include ':data:repository'
+include ':domain'
+include ':presentation:ui-characters'
+include ':common-compose'

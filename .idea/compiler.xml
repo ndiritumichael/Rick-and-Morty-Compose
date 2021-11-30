@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.8">
+      <module name="Rick-and-Morty-Compose.app" target="11" />
+      <module name="Rick-and-Morty-Compose.common-compose" target="11" />
+      <module name="Rick-and-Morty-Compose.commons" target="11" />
+      <module name="Rick-and-Morty-Compose.data.network" target="11" />
+      <module name="Rick-and-Morty-Compose.data.repository" target="11" />
+      <module name="Rick-and-Morty-Compose.domain" target="11" />
+      <module name="Rick-and-Morty-Compose.presentation.ui-characters" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
