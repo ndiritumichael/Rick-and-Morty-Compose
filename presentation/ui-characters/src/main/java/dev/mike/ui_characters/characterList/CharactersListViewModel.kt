@@ -1,4 +1,4 @@
-package dev.mike.ui_characters
+package dev.mike.ui_characters.characterList
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.mike.domain.usecases.GetCharactersUseCase
+import dev.mike.ui_characters.characterList.CharacterListState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -16,7 +17,9 @@ import javax.inject.Inject
 class CharactersListViewModel @Inject constructor(
     private val getCharactersUseCase: GetCharactersUseCase
 ) : ViewModel() {
-    private val _characterListState: MutableState<CharacterListState> = mutableStateOf(CharacterListState())
+    private val _characterListState: MutableState<CharacterListState> = mutableStateOf(
+        CharacterListState()
+    )
     private val handler = CoroutineExceptionHandler { _, exception ->
         _characterListState.value.isLoading = false
         _characterListState.value = CharacterListState(
