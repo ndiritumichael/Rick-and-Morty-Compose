@@ -1,7 +1,10 @@
 package dev.mike.repository.mappers
 
 import dev.mike.domain.model.Character
+import dev.mike.domain.model.CharacterDetails
+import dev.mike.network.models.characters.CharactersDto
 import dev.mike.network.models.characters.ResultDto
+import dev.mike.network.models.characters.singleCharacter.SingleCharacterDto
 
 fun ResultDto.toCharacter(): Character {
 
@@ -12,4 +15,20 @@ fun ResultDto.toCharacter(): Character {
         gender = gender,
         status = status
     )
+}
+
+fun SingleCharacterDto.toCharacter(): CharacterDetails {
+    return CharacterDetails(
+        id = id,
+        name = name,
+        image = image,
+        gender = gender,
+        status = status,
+        episode = episode,
+        location = location.name,
+        origin = origin.name,
+        species = species,
+        type = type
+    )
+
 }
