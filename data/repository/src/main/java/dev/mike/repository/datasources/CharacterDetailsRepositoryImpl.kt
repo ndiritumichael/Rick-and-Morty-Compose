@@ -12,12 +12,12 @@ import javax.inject.Inject
 class CharacterDetailsRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : CharacterDetailsRepository, BaseRepository() {
-    override suspend fun getCharacterDetails(id: Int): Flow<Result<CharacterDetails>> {
+    override suspend fun getCharacterDetails(id: Int): Result<CharacterDetails> {
+       // return flow { Result.success(apiService.getCharacterDetails(id).body()!!.toCharacter()) }
 
-        return flow {
-            safeApiCall {
-                apiService.getCharacterDetails(id).body()?.toCharacter()
+        return safeApiCall {
+                apiService.getCharacterDetails(id).toCharacter()
             }
-        }
+
     }
 }

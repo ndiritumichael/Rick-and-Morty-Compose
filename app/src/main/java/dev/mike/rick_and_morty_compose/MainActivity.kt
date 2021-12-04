@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
 
                    // CharactersList()
-                    DetailsScreen(id = 2)
+                    DetailsScreen(id = 20000000)
                 }
             }
         }

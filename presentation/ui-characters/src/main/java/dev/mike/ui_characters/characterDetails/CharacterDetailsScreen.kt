@@ -18,7 +18,7 @@ fun DetailsScreen(
 
     val detailsState = viewModel.detailsState.value
 
-    Text(text = detailsState.errorMessage)
+    detailsState.errorMessage?.let { Text(text = it) }
 
     detailsState.data?.let {
 

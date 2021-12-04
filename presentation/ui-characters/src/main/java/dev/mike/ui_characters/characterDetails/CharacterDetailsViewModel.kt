@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.mike.domain.usecases.GetCharacterDetailsUsecase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,16 +18,15 @@ class CharacterDetailsViewModel @Inject constructor(
 
     fun getCharacterbyId(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         _detailsState.value = CharacterDetailsState(isLoading = true)
+        val result = getCharacterDetailsUsecase(id)
 
-        getCharacterDetailsUsecase(id).onEach { result ->
-            result.onSuccess { details ->
-                _detailsState.value = CharacterDetailsState(data = details)
-            }
-            result.onFailure {
+        result.onSuccess { details ->
+            _detailsState.value = CharacterDetailsState(data = details)
+        }
+        result.onFailure {
 
-                error ->
-                _detailsState.value = CharacterDetailsState(errorMessage = error.localizedMessage!!)
-            }
+            error ->
+            _detailsState.value = CharacterDetailsState(errorMessage = error.message)
         }
     }
 }
