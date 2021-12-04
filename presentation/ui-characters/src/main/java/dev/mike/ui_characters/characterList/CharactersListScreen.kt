@@ -1,6 +1,7 @@
 package dev.mike.ui_characters
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,7 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -18,6 +19,8 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import dev.mike.commons.components.DialogCircularProgressBar
+import dev.mike.ui_characters.characterDetails.DetailsScreen
+import dev.mike.ui_characters.characterList.CharactersListViewModel
 
 @Composable
 fun CharactersList() {
@@ -26,6 +29,13 @@ fun CharactersList() {
     val state = viewModel.characterListState.value
 
     val characters = state.dataList?.collectAsLazyPagingItems()
+    var show by remember {
+        mutableStateOf(false)
+    }
+
+    if (show) {
+        DetailsScreen(id = 2)
+    }
 
     if (state.errorMessage.isNotEmpty()) {
 
@@ -41,7 +51,14 @@ fun CharactersList() {
 
                 item?.let {
 
-                    Text(text = it.name, modifier = Modifier.fillMaxWidth())
+                    Text(
+                        text = it.name,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                show = true
+                            }
+                    )
                 }
             }
 

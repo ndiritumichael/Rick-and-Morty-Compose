@@ -1,4 +1,4 @@
-package dev.mike.ui_characters
+package dev.mike.ui_characters.characterList
 
 import androidx.paging.PagingData
 import dev.mike.domain.model.Character
