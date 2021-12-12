@@ -1,5 +1,7 @@
 package dev.mike.rick_and_morty_compose.components
 
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,12 +14,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import dev.mike.rick_and_morty_compose.navigation.MainNavigation
 import dev.mike.rick_and_morty_compose.navigation.NavigationItem
 
+@ExperimentalAnimationApi
 @Composable
 fun AppContent() {
     val navController = rememberNavController()
-    val backStackEntry = navController.currentBackStackEntryAsState()
 
     val bottomScreens = listOf(
         NavigationItem.Home,
@@ -36,7 +39,10 @@ fun AppContent() {
                 BottomNavigationBar(navController, bottomScreens)
             }
         }
-    ) {
+    ) { padding ->
+        Box(modifier = Modifier.padding(padding)) {
+            MainNavigation(navhostController = navController)
+        }
     }
 }
 
@@ -46,10 +52,9 @@ fun BottomNavigationBar(navHostController: NavHostController, bottomScreens: Lis
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 15.dp, vertical = 8.dp)
             .alpha(0.85F),
         elevation = 10.dp,
-        shape = RoundedCornerShape(10.dp)
+        shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
     ) {
 
         BottomNavigation() {

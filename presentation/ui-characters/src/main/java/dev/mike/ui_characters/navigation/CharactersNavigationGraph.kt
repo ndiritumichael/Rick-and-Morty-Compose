@@ -2,7 +2,7 @@ package dev.mike.ui_characters.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.*
-import com.google.accompanist.navigation.animation.composable
+import androidx.navigation.compose.composable
 import dev.mike.ui_characters.CharactersList
 import dev.mike.ui_characters.characterDetails.CharacterDetailsScreen
 
@@ -16,30 +16,31 @@ fun NavGraphBuilder.charactersGraph(
     ) {
 
         composable(
-            route = "character"
+            route = "characters"
         ) {
 
-            CharactersList()
+            CharactersList { characterId ->
+                navHostController.navigate("characterDetails/$characterId")
+            }
         }
 
         composable(
-            route = "characterDetails/{id}",
+            route = "characterDetails/{characterId}",
             arguments = listOf(
-               navArgument(name = "characterId",
-               ){
-                   type = NavType.IntType
-               }
+                navArgument(
+                    name = "characterId",
+                ) {
+                    type = NavType.IntType
+                }
             )
-        ){ backStackEntry ->
+        ) { backStackEntry ->
             val characterId = backStackEntry.arguments?.getInt("characterId")
-            characterId?.let{
+            characterId?.let {
 
                 CharacterDetailsScreen(
                     id = characterId
                 )
             }
-
-
         }
     }
 }

@@ -10,7 +10,7 @@ import dev.mike.ui_characters.navigation.charactersGraph
 @Composable
 fun MainNavigation(navhostController: NavHostController) {
 
-    NavHost(navController = navhostController, startDestination = NavigationItem.Home.route) {
+    NavHost(navController = navhostController, startDestination = "characterlist") {
 
         charactersGraph(navhostController)
     }

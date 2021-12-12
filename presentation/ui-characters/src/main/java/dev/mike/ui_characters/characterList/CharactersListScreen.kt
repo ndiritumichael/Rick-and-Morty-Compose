@@ -20,11 +20,10 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import dev.mike.commons.components.DialogCircularProgressBar
 import dev.mike.ui_characters.characterDetails.CharacterDetailsScreen
-
 import dev.mike.ui_characters.characterList.CharactersListViewModel
 
 @Composable
-fun CharactersList() {
+fun CharactersList(navigate: (Int) -> Unit) {
     val context = LocalContext.current
     val viewModel: CharactersListViewModel = hiltViewModel()
     val state = viewModel.characterListState.value
@@ -57,7 +56,7 @@ fun CharactersList() {
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                show = true
+                              navigate(it.id)
                             }
                     )
                 }
