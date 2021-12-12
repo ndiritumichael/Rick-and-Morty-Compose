@@ -11,8 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
 import dev.mike.common.Constants.common
 import dev.mike.commons.ui.theme.RickandMortyComposeTheme
-import dev.mike.ui_characters.CharactersList
-import dev.mike.ui_characters.characterDetails.DetailsScreen
+import dev.mike.rick_and_morty_compose.components.AppContent
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -23,8 +22,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
 
-                   // CharactersList()
-                    DetailsScreen(id = 20000000)
+                    AppContent()
                 }
             }
         }

@@ -7,7 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun DetailsScreen(
+fun CharacterDetailsScreen(
     id: Int,
     viewModel: CharacterDetailsViewModel = hiltViewModel(),
 
