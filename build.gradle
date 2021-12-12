@@ -11,6 +11,7 @@ buildscript {
         paging_version = "3.1.0"
         paging_compose = "1.0.0-alpha14"
         navigation_animation = "0.20.2"
+        landscapist_coil="1.4.4"
 
     }
     repositories {

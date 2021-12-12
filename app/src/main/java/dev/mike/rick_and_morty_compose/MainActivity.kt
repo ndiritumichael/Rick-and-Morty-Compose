@@ -3,6 +3,7 @@ package dev.mike.rick_and_morty_compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -11,11 +12,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
 import dev.mike.common.Constants.common
 import dev.mike.commons.ui.theme.RickandMortyComposeTheme
-import dev.mike.ui_characters.CharactersList
-import dev.mike.ui_characters.characterDetails.DetailsScreen
+import dev.mike.rick_and_morty_compose.components.AppContent
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -23,8 +24,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
 
-                   // CharactersList()
-                    DetailsScreen(id = 20000000)
+                    AppContent()
                 }
             }
         }

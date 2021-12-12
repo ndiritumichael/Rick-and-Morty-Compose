@@ -1,4 +1,4 @@
-package dev.mike.rick_and_morty_compose.app_utils
+package dev.mike.rick_and_morty_compose.navigation
 
 import dev.mike.rick_and_morty_compose.R
 
