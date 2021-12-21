@@ -30,12 +30,13 @@ fun CharactersSearch(
     Scaffold(
         topBar =
         {
-            CustomSearchBar(value = searchString,
-                placeholder ="SearchCharacters" ,
-                navigateUp = navigateUp, onValueChange ={ name ->
+            CustomSearchBar(
+                value = searchString,
+                placeholder = "Search Characters",
+                navigateUp = navigateUp, onValueChange = { name ->
                     viewModel.searchCharacter(name)
-
-                } )
+                }
+            )
         }
     ) {
 

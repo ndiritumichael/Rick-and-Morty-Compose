@@ -1,8 +1,6 @@
 package dev.mike.commons.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -21,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun CustomSearchBar(value: String, placeholder: String, navigateUp: () -> Unit, onValueChange: (String) -> Unit) {
@@ -55,10 +54,14 @@ fun CustomSearchBar(value: String, placeholder: String, navigateUp: () -> Unit, 
                         focusRequester = requester
                     ),
                 trailingIcon = {
-                    IconButton(onClick = {
-                        onValueChange("")
-                    }) {
-                        Icon(imageVector = Icons.Default.Clear, contentDescription = "clear Search")
+                    if (value.isNotBlank()) {
+                        IconButton(onClick = {
+                            onValueChange("")
+                        }) {
+                            Icon(imageVector = Icons.Default.Clear, contentDescription = "clear Search",
+                                modifier = Modifier.padding(end = 8.dp)
+                                    .size(20.dp))
+                        }
                     }
                 },
                 keyboardOptions = KeyboardOptions(
