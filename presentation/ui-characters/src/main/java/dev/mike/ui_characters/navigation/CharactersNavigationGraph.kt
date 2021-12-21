@@ -10,6 +10,7 @@ import com.google.accompanist.navigation.animation.navigation
 import dev.mike.common.Characters
 import dev.mike.ui_characters.CharactersList
 import dev.mike.ui_characters.characterDetails.CharacterDetailsScreen
+import dev.mike.ui_characters.charactersSearch.CharactersSearch
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.charactersGraph(
@@ -41,7 +42,7 @@ fun NavGraphBuilder.charactersGraph(
 
         ) {
 
-            CharactersList { characterId ->
+            CharactersList ({navHostController.navigate(Characters.CHARACTERSEARCH)}){ characterId ->
                 navHostController.navigate(Characters.CHARACTERDETAILS+"/$characterId") {
                     launchSingleTop
                 }
@@ -64,6 +65,14 @@ fun NavGraphBuilder.charactersGraph(
                 CharacterDetailsScreen(
                     id = characterId
                 )
+            }
+        }
+
+        composable(Characters.CHARACTERSEARCH){
+
+            CharactersSearch {
+                navHostController.navigateUp()
+
             }
         }
     }
