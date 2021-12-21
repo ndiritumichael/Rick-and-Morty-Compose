@@ -60,7 +60,10 @@ class CharacterSearchViewModel @Inject constructor(
 
     fun searchCharacterbyName(searchString: String) {
         viewModelScope.launch {
-            delay(1000)
+            _searchResult.value = CharacterListState(
+                dataList = null
+            )
+            delay(3000)
             val response = characterListUseCase.invoke(searchString)
             _searchResult.value = CharacterListState(
                 dataList = response

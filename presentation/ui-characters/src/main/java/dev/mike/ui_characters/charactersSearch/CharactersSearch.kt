@@ -39,17 +39,18 @@ fun CharactersSearch(
         ) {
             IconButton(onClick = { navigateUp }) {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
-                TextField(
-                    value = viewModel.searchString.collectAsState().value,
-                    onValueChange = { name ->
-                        viewModel.searchCharacter(name)
-                    },
-                    placeholder = {
-                        Text(text = "Search Characters")
-                    }
-                )
+
 
             }
+            TextField(
+                value = viewModel.searchString.collectAsState().value,
+                onValueChange = { name ->
+                    viewModel.searchCharacter(name)
+                },
+                placeholder = {
+                    Text(text = "Search Characters")
+                }
+            )
 
         }
 
