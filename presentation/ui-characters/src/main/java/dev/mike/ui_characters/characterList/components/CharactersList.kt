@@ -15,29 +15,29 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
-import dev.mike.commons.components.DialogCircularProgressBar
 import dev.mike.domain.model.Character
 
 @Composable
-fun CharactersListColumn(items: LazyPagingItems<Character>,navigate:(Int) -> Unit ={}) {
+fun CharactersListColumn(items: LazyPagingItems<Character>, navigate: (Int) -> Unit = {}) {
     LazyColumn {
 
         items(items) { character ->
-                CharacterUI(character = character!!) { id ->
+            CharacterUI(character = character!!) { id ->
 
-                    navigate(id)
-
-                }
-
-
-
+                navigate(id)
+            }
         }
 
         items.apply {
             when {
                 loadState.refresh is LoadState.Loading -> {
                     item {
-                        DialogCircularProgressBar()
+                        Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(modifier = Modifier.height(30.dp))
+                        }
                     }
                 }
 
@@ -64,12 +64,9 @@ fun CharactersListColumn(items: LazyPagingItems<Character>,navigate:(Int) -> Uni
                                 Text(text = errorMessage.error.localizedMessage!!)
                                 Button(onClick = { retry() }) {
                                     Text(text = "Try Again")
-
                                 }
                             }
                         }
-
-
                     }
                 }
 
@@ -85,7 +82,6 @@ fun CharactersListColumn(items: LazyPagingItems<Character>,navigate:(Int) -> Uni
                                 Text(text = errorMessage.error.localizedMessage!!)
                                 Button(onClick = { retry() }) {
                                     Text(text = "Try Again")
-
                                 }
                             }
                         }
