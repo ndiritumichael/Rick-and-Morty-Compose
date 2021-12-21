@@ -4,9 +4,11 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.request.ImageRequest
 import com.skydoves.landscapist.CircularReveal
 import com.skydoves.landscapist.coil.CoilImage
@@ -24,14 +27,21 @@ import dev.mike.domain.model.Character
 @Composable
 fun CharacterUI(character: Character,onClick:(Int)-> Unit) {
     AnimatedVisibility(visible = true) {
-        Card(modifier = Modifier.padding(4.dp).clickable {
-            onClick(character.id)
-        }, shape = RoundedCornerShape(8.dp),) {
+        Card(modifier = Modifier
+            .padding(8.dp)
+            .clickable {
+                onClick(character.id)
+            }
+            .fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+        elevation = 8.dp) {
             Row() {
                 ImageCard(imageLink = character.imageUrl,
                     modifier = Modifier
-                        .fillMaxWidth(0.5f))
-                CharacterInfo(character = character)
+                        .fillMaxWidth(0.35f))
+                CharacterInfo(character = character,modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(4.dp))
             }
         }
 
@@ -70,13 +80,18 @@ fun CharacterInfo(character: Character, modifier: Modifier = Modifier) {
         else -> Color.Gray
     }
     Column(modifier = modifier) {
-        Text(text = character.name, fontWeight = FontWeight.Bold)
-        Text(text = "Origin: ${character.origin}")
-        Row() {
+        Text(text = character.name, fontWeight = FontWeight.Bold,style = MaterialTheme.typography.h6)
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = "Origin", fontSize =  13.sp)
+        Text(text = character.origin)
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(text = "Status", fontSize =  13.sp)
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Box(
                 modifier = Modifier
-                    .size(3.dp)
-                    .background(color = color)
+                    .size(10.dp)
+                    .background(color = color, shape = CircleShape)
             )
             Text(text = character.status + " - " + character.species)
 
