@@ -19,25 +19,29 @@ import javax.inject.Inject
 @HiltViewModel
 class CharacterSearchViewModel @Inject constructor(
     private val characterListUseCase: GetCharactersUseCase
-): ViewModel() {
+) : ViewModel() {
     private var _searchResult = mutableStateOf(CharacterListState())
     var searchResult = _searchResult
 
     private val _searchString = MutableStateFlow("")
     val searchString = _searchString.asStateFlow()
+
     @ExperimentalCoroutinesApi
-    private val searchResponse = searchString.mapLatest { searchName ->
-        delay(1000)
+    private val searchResponse = searchString.flatMapLatest { searchName ->
+        //delay(1000)
 
         characterListUseCase.invoke(searchName).cachedIn(viewModelScope)
 
     }.shareIn(viewModelScope, SharingStarted.WhileSubscribed(), replay = 1)
+
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            _searchResult.value = CharacterListState(isLoading = true)
+        viewModelScope.launch {
+            //_searchResult.value = CharacterListState(isLoading = true)
             searchResponse.onEach { results ->
                 _searchResult.value = CharacterListState(
-                    dataList = results
+                    dataList = flow {
+                        emit(results)
+                    }
                 )
 
 
@@ -46,17 +50,24 @@ class CharacterSearchViewModel @Inject constructor(
         }
 
 
-
     }
 
-    fun searchCharacter(name:String){
+    fun searchCharacter(name: String) {
         _searchString.value = name
 
 
     }
 
+    fun searchCharacterbyName(searchString: String) {
+        viewModelScope.launch {
+            delay(1000)
+            val response = characterListUseCase.invoke(searchString)
+            _searchResult.value = CharacterListState(
+                dataList = response
+            )
+        }
 
-
+    }
 
 
 }

@@ -15,7 +15,7 @@ class CharactersRepositoryImpl @Inject constructor(
     override suspend fun getAllCharacters(name: String?): Flow<PagingData<Character>> {
 
         return Pager(PagingConfig(pageSize = 20)) {
-            CharactersPagingSource(apiService = apiService)
+            CharactersPagingSource(apiService = apiService,name = name)
         }.flow
     }
 }

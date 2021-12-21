@@ -4,7 +4,8 @@ package dev.mike.common
 object Characters {
     val CHARACTERSGRAPH = "characters"
     val CHARACTERlIST = "characterlist"
-    val CHARACTERDETAILS = "charcterdetails"
+    val CHARACTERDETAILS = "characterdetails"
+    val CHARACTERSEARCH = "charactersearch"
 
 }
 

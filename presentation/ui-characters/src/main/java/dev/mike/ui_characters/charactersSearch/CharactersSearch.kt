@@ -6,6 +6,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +25,12 @@ fun CharactersSearch(
     val state = viewModel.searchResult.value
 
     val characters = state.dataList?.collectAsLazyPagingItems()
+
+    val searchString = viewModel.searchString.collectAsState().value
+    LaunchedEffect(key1 = searchString){
+
+        viewModel.searchCharacterbyName(searchString)
+    }
     Scaffold(topBar =
     {
         Row(
@@ -36,7 +43,11 @@ fun CharactersSearch(
                     value = viewModel.searchString.collectAsState().value,
                     onValueChange = { name ->
                         viewModel.searchCharacter(name)
-                    })
+                    },
+                    placeholder = {
+                        Text(text = "Search Characters")
+                    }
+                )
 
             }
 
