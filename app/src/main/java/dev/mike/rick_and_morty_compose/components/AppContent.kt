@@ -8,6 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import dev.mike.common.Characters
+import dev.mike.common.Episodes
+import dev.mike.common.Locations
 import dev.mike.rick_and_morty_compose.navigation.BottomNavigationBar
 import dev.mike.rick_and_morty_compose.navigation.MainNavigation
 import dev.mike.rick_and_morty_compose.navigation.NavigationItem
@@ -18,20 +21,19 @@ fun AppContent() {
     val navController = rememberAnimatedNavController()
 
     val bottomScreens = listOf(
-        NavigationItem.Characters,
-        NavigationItem.Locations,
-        NavigationItem.Episodes,
+        Characters.CHARACTERlIST,
+        Episodes.EPISODELIST,
+        Locations.LOCATIONlIST
     )
 
+
     val showNavBar = navController
-        .currentBackStackEntryAsState().value?.destination?.route in bottomScreens.map {
-        it.route
-    }
+        .currentBackStackEntryAsState().value?.destination?.route in bottomScreens
 
     Scaffold(
         bottomBar = {
             if (showNavBar) {
-                BottomNavigationBar(navController, bottomScreens)
+                BottomNavigationBar(navController)
             }
         }
     ) { padding ->

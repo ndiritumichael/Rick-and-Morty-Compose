@@ -16,7 +16,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
-fun BottomNavigationBar(navHostController: NavHostController, bottomScreens: List<NavigationItem>) {
+fun BottomNavigationBar(navHostController: NavHostController) {
+    val bottomScreens = listOf(
+        NavigationItem.Characters,
+        NavigationItem.Locations,
+        NavigationItem.Episodes,
+    )
 
     Card(
         modifier = Modifier
