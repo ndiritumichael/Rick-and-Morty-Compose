@@ -20,6 +20,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import dev.mike.commons.components.DialogCircularProgressBar
 import dev.mike.ui_characters.characterList.CharactersListViewModel
+import dev.mike.ui_characters.characterList.components.CharacterUI
 
 @Composable
 fun CharactersList(navigate: (Int) -> Unit) {
@@ -41,16 +42,14 @@ fun CharactersList(navigate: (Int) -> Unit) {
         LazyColumn {
             items(items) { item ->
 
-                item?.let {
+                item?.let { character ->
+                    CharacterUI(character = character) { id ->
 
-                    Text(
-                        text = it.name,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                navigate(it.id)
-                            }
-                    )
+                        navigate(id)
+
+                    }
+
+
                 }
             }
 
@@ -65,7 +64,10 @@ fun CharactersList(navigate: (Int) -> Unit) {
                     loadState.append is LoadState.Loading -> {
 
                         item {
-                            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                            Box(
+                                modifier = Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.Center
+                            ) {
                                 CircularProgressIndicator(modifier = Modifier.height(30.dp))
                             }
                         }
@@ -75,14 +77,22 @@ fun CharactersList(navigate: (Int) -> Unit) {
                         val errorMessage = items.loadState.refresh as LoadState.Error
                         item {
 
-                            Toast.makeText(context, errorMessage.error.localizedMessage, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                errorMessage.error.localizedMessage,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
                     loadState.append is LoadState.Error -> {
                         val errorMessage = items.loadState.append as LoadState.Error
 
-                        Toast.makeText(context, errorMessage.error.localizedMessage, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            errorMessage.error.localizedMessage,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
