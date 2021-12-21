@@ -13,7 +13,10 @@ fun ResultDto.toCharacter(): Character {
         name = name,
         imageUrl = image,
         gender = gender,
-        status = status
+        status = status,
+        origin = origin.name,
+        species = species
+
     )
 }
 

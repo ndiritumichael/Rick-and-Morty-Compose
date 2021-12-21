@@ -2,11 +2,9 @@ package dev.mike.ui_characters
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -20,10 +18,11 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import dev.mike.commons.components.DialogCircularProgressBar
 import dev.mike.ui_characters.characterList.CharactersListViewModel
+import dev.mike.ui_characters.characterList.components.CharacterUI
 
 @Composable
 fun CharactersList(navigate: (Int) -> Unit) {
-    val context = LocalContext.current
+
     val viewModel: CharactersListViewModel = hiltViewModel()
     val state = viewModel.characterListState.value
 
@@ -41,16 +40,14 @@ fun CharactersList(navigate: (Int) -> Unit) {
         LazyColumn {
             items(items) { item ->
 
-                item?.let {
+                item?.let { character ->
+                    CharacterUI(character = character) { id ->
 
-                    Text(
-                        text = it.name,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                navigate(it.id)
-                            }
-                    )
+                        navigate(id)
+
+                    }
+
+
                 }
             }
 
@@ -65,7 +62,10 @@ fun CharactersList(navigate: (Int) -> Unit) {
                     loadState.append is LoadState.Loading -> {
 
                         item {
-                            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                            Box(
+                                modifier = Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.Center
+                            ) {
                                 CircularProgressIndicator(modifier = Modifier.height(30.dp))
                             }
                         }
@@ -74,15 +74,40 @@ fun CharactersList(navigate: (Int) -> Unit) {
                     loadState.refresh is LoadState.Error -> {
                         val errorMessage = items.loadState.refresh as LoadState.Error
                         item {
+                            Box(
+                                modifier = Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.BottomCenter
+                            ) {
+                                Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text(text = errorMessage.error.localizedMessage!!)
+                                    Button(onClick = { retry() }) {
+                                        Text(text = "Try Again")
 
-                            Toast.makeText(context, errorMessage.error.localizedMessage, Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+
+
                         }
                     }
 
                     loadState.append is LoadState.Error -> {
                         val errorMessage = items.loadState.append as LoadState.Error
 
-                        Toast.makeText(context, errorMessage.error.localizedMessage, Toast.LENGTH_SHORT).show()
+                       item {
+                           Box(
+                               modifier = Modifier.fillMaxWidth(),
+                               contentAlignment = Alignment.BottomCenter
+                           ) {
+                               Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                                   Text(text = errorMessage.error.localizedMessage!!)
+                                   Button(onClick = { retry() }) {
+                                       Text(text = "Try Again")
+
+                                   }
+                               }
+                           }
+                       }
                     }
                 }
             }

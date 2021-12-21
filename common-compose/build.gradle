@@ -53,5 +53,5 @@ dependencies {
 
     //navigation
     api"com.google.accompanist:accompanist-navigation-animation:$navigation_animation"
-    implementation "com.github.skydoves:landscapist-coil:$landscapist_coil"
+    api "com.github.skydoves:landscapist-coil:$landscapist_coil"
 }

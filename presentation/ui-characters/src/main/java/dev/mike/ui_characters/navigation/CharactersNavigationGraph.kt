@@ -7,6 +7,7 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.navigation.*
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
+import dev.mike.common.Characters
 import dev.mike.ui_characters.CharactersList
 import dev.mike.ui_characters.characterDetails.CharacterDetailsScreen
 
@@ -15,12 +16,12 @@ fun NavGraphBuilder.charactersGraph(
     navHostController: NavHostController
 ) {
     navigation(
-        startDestination = "characters",
-        route = "characterlist"
+        startDestination = Characters.CHARACTERlIST,
+        route = Characters.CHARACTERSGRAPH
     ) {
 
         composable(
-            route = "characters",
+            route = Characters.CHARACTERlIST,
             enterTransition = { //initial: NavBackStackEntry, target: NavBackStackEntry ->
 
                 slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700))
@@ -41,14 +42,14 @@ fun NavGraphBuilder.charactersGraph(
         ) {
 
             CharactersList { characterId ->
-                navHostController.navigate("characterDetails/$characterId") {
+                navHostController.navigate(Characters.CHARACTERDETAILS+"/$characterId") {
                     launchSingleTop
                 }
             }
         }
 
         composable(
-            route = "characterDetails/{characterId}",
+            route = Characters.CHARACTERDETAILS+"/{characterId}",
             arguments = listOf(
                 navArgument(
                     name = "characterId",

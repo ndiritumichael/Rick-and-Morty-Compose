@@ -34,7 +34,7 @@ class CharactersListViewModel @Inject constructor(
 
     private fun getCharacters() = viewModelScope.launch(handler) {
         val response = getCharactersUseCase().cachedIn(viewModelScope)
-        delay(1000)
+        //delay(1000)
         // to show progressBar to be removed
         _characterListState.value = CharacterListState(
             dataList = response
