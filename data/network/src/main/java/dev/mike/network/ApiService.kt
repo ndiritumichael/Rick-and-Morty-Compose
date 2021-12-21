@@ -11,11 +11,17 @@ interface ApiService {
 
     @GET("character")
     suspend fun getCharacters(
-        @Query("page") page: Int
+        @Query("page") page: Int,
+    @Query("name")name:String?= null
     ): CharactersDto
 
     @GET("character/{character_id}")
     suspend fun getCharacterDetails(
         @Path("character_id") character_id: Int
     ): SingleCharacterDto
+
+    @GET("character")
+    suspend fun filterCharacters(
+        @Query("name") name: String
+    ):CharactersDto
 }

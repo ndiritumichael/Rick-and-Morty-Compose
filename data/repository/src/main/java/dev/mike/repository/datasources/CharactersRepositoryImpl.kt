@@ -12,7 +12,7 @@ import javax.inject.Inject
 class CharactersRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : CharactersRepository {
-    override suspend fun getAllCharacters(): Flow<PagingData<Character>> {
+    override suspend fun getAllCharacters(name: String?): Flow<PagingData<Character>> {
 
         return Pager(PagingConfig(pageSize = 20)) {
             CharactersPagingSource(apiService = apiService)
@@ -21,6 +21,7 @@ class CharactersRepositoryImpl @Inject constructor(
 }
 
 class CharactersPagingSource(
+    private val name:String? =null,
     private val apiService: ApiService
 ) : PagingSource<Int, Character>() {
     override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
@@ -32,7 +33,7 @@ class CharactersPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         val pageNumber = params.key ?: 1
         return try {
-            val charactersResponse = apiService.getCharacters(pageNumber)
+            val charactersResponse = apiService.getCharacters(pageNumber,name)
             val characters = charactersResponse.results.map { character ->
                 character.toCharacter()
             }
