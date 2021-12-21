@@ -18,9 +18,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 @Composable
 fun BottomNavigationBar(navHostController: NavHostController) {
     val bottomScreens = listOf(
-        NavigationItem.Characters,
-        NavigationItem.Locations,
-        NavigationItem.Episodes,
+        NavigationItem.CharactersScreen,
+        NavigationItem.LocationsScreen,
+        NavigationItem.EpisodesScreen,
     )
 
     Card(
