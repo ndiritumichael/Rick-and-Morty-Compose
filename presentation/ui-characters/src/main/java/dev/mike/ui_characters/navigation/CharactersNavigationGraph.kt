@@ -4,6 +4,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+
 import androidx.navigation.*
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
@@ -63,7 +64,8 @@ fun NavGraphBuilder.charactersGraph(
             characterId?.let {
 
                 CharacterDetailsScreen(
-                    id = characterId
+                    id = characterId,
+                    {navHostController.popBackStack()}
                 )
             }
         }

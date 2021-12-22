@@ -58,9 +58,11 @@ fun CustomSearchBar(value: String, placeholder: String, navigateUp: () -> Unit, 
                         IconButton(onClick = {
                             onValueChange("")
                         }) {
-                            Icon(imageVector = Icons.Default.Clear, contentDescription = "clear Search",
+                            Icon(
+                                imageVector = Icons.Default.Clear, contentDescription = "clear Search",
                                 modifier = Modifier.padding(end = 8.dp)
-                                    .size(20.dp))
+                                    .size(20.dp)
+                            )
                         }
                     }
                 },
