@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import dev.mike.commons.components.MediumSpacer
 import dev.mike.ui_characters.characterList.components.ImageCard
 
 @Composable
@@ -40,11 +41,11 @@ fun CharacterDetailsScreen(
         modifier = Modifier.fillMaxSize()
     ) {
 
-
         detailsState.data?.let { character ->
 
             Column(modifier = Modifier.fillMaxSize()) {
                 ImageCard(character.image, modifier = Modifier.fillMaxHeight(0.4f))
+                MediumSpacer()
             }
         }
         Surface(
