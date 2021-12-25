@@ -1,4 +1,4 @@
-# Kyosk-Interview
+# Rick and Morty Compose
 
 An android app built using Kotlin that consumes [Rick and Morty API](https://rickandmortyapi.com) to display characters,episodes,Location from the [TV Series](https://www.imdb.com/title/tt2861424/). It has been built following Clean Architecture Principle, Repository Pattern, MVVM Architecture in the presentation layer as well as Jetpack components(including Jetpack Compose).
 
@@ -41,6 +41,7 @@ A well planned architecture is extremely important for an app to scale and all a
 
 Clean architecture was proposed by [Robert C. Martin](https://en.wikipedia.org/wiki/Robert_C._Martin) in 2012 in the [Clean Code Blog](http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and it follow the SOLID principle.
 
+<p align="center"><img src="assets/architecturecircles.png" alt="Clean Architecture Diagram"></p>
 <p align="center"><img src="assets/architecture.png" alt="Clean Architecture Diagram"></p>
 
 The circles represent different layers of your app. Note that:
@@ -144,7 +145,7 @@ In this section i've included some resources ie. articles and GitHub repositorie
 3. [Clean Architecture Component Boilerplater](https://github.com/bufferapp/clean-architecture-components-boilerplate) GitHub repo .
 4. [Gamex Compose](https://github.com/VictorKabata/Gamex-Compose) GitHub repo by [Victor Kabata](https://github.com/VictorKabata) demonstrating using clean architecture pattern  
 5. [Clean architecture sample](https://www.youtube.com/watch?v=Mr8YKDh3li4) article by Philip Lackner
-6. [Foodies](https://github.com/LinusMuema/foodies/) Github Repo by [Linus Moose](https://github.com/LinusMuema)
-7. [Pokedex](https://github.com/ronnieotieno/PokeApi-Pokedex) by [Ronnie Otieno](https://github.com/ronnieotieno)
+6. [Foodies](https://github.com/LinusMuema/foodies/) Github Repo by [Linus Moose](https://github.com/LinusMuema) to show how to build UIs with Compose
+7. [Pokedex](https://github.com/ronnieotieno/PokeApi-Pokedex) by [Ronnie Otieno](https://github.com/ronnieotieno) demonstrating how to properly use Jetpack Components
 
 
