@@ -9,8 +9,6 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -54,4 +52,10 @@ dependencies {
     //navigation
     api"com.google.accompanist:accompanist-navigation-animation:$navigation_animation"
     api "com.github.skydoves:landscapist-coil:$landscapist_coil"
+
+    api "com.google.accompanist:accompanist-insets:$accompanist"
+    // If using insets-ui
+    api "com.google.accompanist:accompanist-insets-ui:$accompanist"
+
+    api "com.google.accompanist:accompanist-systemuicontroller:$accompanist"
 }

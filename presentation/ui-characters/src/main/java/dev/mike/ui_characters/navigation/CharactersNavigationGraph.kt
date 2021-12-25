@@ -64,7 +64,7 @@ fun NavGraphBuilder.charactersGraph(
             characterId?.let {
 
                 CharacterDetailsScreen(
-                    id = characterId,
+
                     {navHostController.popBackStack()}
                 )
             }
