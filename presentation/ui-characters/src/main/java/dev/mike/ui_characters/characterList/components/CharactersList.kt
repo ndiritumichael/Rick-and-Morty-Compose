@@ -1,9 +1,6 @@
 package dev.mike.ui_characters.characterList.components
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
@@ -33,10 +30,13 @@ fun CharactersListColumn(items: LazyPagingItems<Character>, navigate: (Int) -> U
                 loadState.refresh is LoadState.Loading -> {
                     item {
                         Box(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier.fillMaxSize()
+                                .padding(top = 50.dp,
+                                    bottom = 50.dp),
                             contentAlignment = Alignment.Center
                         ) {
-                            CircularProgressIndicator(modifier = Modifier.height(30.dp))
+                            CircularProgressIndicator(modifier = Modifier.height(30.dp)
+                                )
                         }
                     }
                 }

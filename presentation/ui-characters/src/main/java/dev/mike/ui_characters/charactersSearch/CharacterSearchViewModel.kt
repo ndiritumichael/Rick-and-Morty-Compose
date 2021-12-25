@@ -51,6 +51,11 @@ class CharacterSearchViewModel @Inject constructor(
     }
 
     fun searchCharacter(name: String) {
+        if (name == "") {
+            _searchResult.value = CharacterListState(
+                dataList = null
+            )
+        }
         _searchString.value = name
     }
 

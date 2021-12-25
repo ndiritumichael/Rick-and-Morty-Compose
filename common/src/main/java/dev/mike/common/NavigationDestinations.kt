@@ -1,27 +1,24 @@
 package dev.mike.common
 
-
 object Characters {
-    val CHARACTERSGRAPH = "characters"
-    val CHARACTERlIST = "characterlist"
-    val CHARACTERDETAILS = "characterdetails"
-    val CHARACTERSEARCH = "charactersearch"
-
+    const val CHARACTERSGRAPH = "characters"
+    const val CHARACTERlIST = "characterlist"
+    const val CHARACTERDETAILS = "characterdetails"
+    const val CHARACTERSEARCH = "charactersearch"
 }
 
 object Episodes {
-val EPISODESGRAPH = "episodes"
-    val EPISODELIST = "episodelist"
-    val EPISODEDETAILS = "episodedetails"
-
+    const val EPISODESGRAPH = "episodes"
+    const val EPISODELIST = "episodelist"
+    const val EPISODEDETAILS = "episodedetails"
 }
 
 object Locations {
-    val LOCATIONSGRAPH = "locations"
-    val LOCATIONlIST = "locationlist"
-    val LOCATIONDETAILS = "locationdetails"
+    const val LOCATIONSGRAPH = "locations"
+    const val LOCATIONlIST = "locationlist"
+    const val LOCATIONDETAILS = "locationdetails"
 }
 
 object About {
-    val ABOUTSCREEN = "aboutscreen"
+    const val ABOUTSCREEN = "aboutscreen"
 }
