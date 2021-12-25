@@ -132,9 +132,9 @@ and supports coroutines out of the box.
 - [LandScapist](https://github.com/skydoves/Landscapist) - Jetpack Compose image loading library which fetches and displays network images with Glide, Coil, and Fresco.
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides runBlocking coroutine builder used in tests.
 
--[Compose-Accompanist](https://google.github.io/accompanist/) Accompanist is a group of libraries that aim to supplement Jetpack Compose with features that are commonly required by developers but not yet available.
-  -[Navigation Animation](https://google.github.io/accompanist/navigation-animation/) A library which provides Compose Animation support for Jetpack Navigation Compose.
-  -[System UI Controller ](https://google.github.io/accompanist/systemuicontroller/) System UI Controller provides easy-to-use utilities for updating the System UI bar colors within Jetpack Compose.
+- [Compose-Accompanist](https://google.github.io/accompanist/) -Accompanist is a group of libraries that aim to supplement Jetpack Compose with features that are commonly required by developers but not yet available.
+  -  [Navigation Animation](https://google.github.io/accompanist/navigation-animation/) A library which provides Compose Animation support for Jetpack Navigation Compose.
+  -  [System UI Controller ](https://google.github.io/accompanist/systemuicontroller/) System UI Controller provides easy-to-use utilities for updating the System UI bar colors within Jetpack Compose.
 
 
 # Helpful Resources
