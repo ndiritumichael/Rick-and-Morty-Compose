@@ -144,7 +144,7 @@ In this section i've included some resources ie. articles and GitHub repositorie
 2. [A detailed guide on developing android apps using clean architecture pattern](https://medium.com/@dmilicic/a-detailed-guide-on-developing-android-apps-using-the-clean-architecture-pattern-d38d71e94029) Medium article.
 3. [Clean Architecture Component Boilerplater](https://github.com/bufferapp/clean-architecture-components-boilerplate) GitHub repo .
 4. [Gamex Compose](https://github.com/VictorKabata/Gamex-Compose) GitHub repo by [Victor Kabata](https://github.com/VictorKabata) demonstrating using clean architecture pattern  
-5. [Clean architecture sample](https://www.youtube.com/watch?v=Mr8YKDh3li4) article by Philip Lackner
+5. [Clean architecture sample](https://www.youtube.com/watch?v=Mr8YKDh3li4) Video by Philip Lackner
 6. [Foodies](https://github.com/LinusMuema/foodies/) Github Repo by [Linus Moose](https://github.com/LinusMuema) to show how to build UIs with Compose
 7. [Pokedex](https://github.com/ronnieotieno/PokeApi-Pokedex) by [Ronnie Otieno](https://github.com/ronnieotieno) demonstrating how to properly use Jetpack Components
 
