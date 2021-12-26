@@ -127,7 +127,7 @@ and supports coroutines out of the box.
 - [OkHttp-Logging-Interceptor](https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor/README.md) - Logs HTTP request and response data.
 - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines.
 - [Flow](https://developer.android.com/kotlin/flow) - Flows are built on top of coroutines and can provide multiple values. A flow is conceptually a stream of data that can be computed asynchronously.
-- [Square/Logcat]https://github.com/square/logcat)-Library for easier logging.
+- [Square/Logcat](https://github.com/square/logcat)-Library for easier logging.
 - [Material Design](https://material.io/develop/android/docs/getting-started/) - Build awesome beautiful UIs.
 - [LandScapist](https://github.com/skydoves/Landscapist) - Jetpack Compose image loading library which fetches and displays network images with Glide, Coil, and Fresco.
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides runBlocking coroutine builder used in tests.
