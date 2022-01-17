@@ -17,19 +17,21 @@ class CharacterDetailsViewModel @Inject constructor(
 ) : ViewModel() {
     private val _detailsState = mutableStateOf(CharacterDetailsState())
     val detailsState = _detailsState
+    val characterId = mutableStateOf(0)
 
     init {
         val id = savedStateHandle.get<Int>("characterId")
         if (id != null) {
-            getCharacterbyId(id)
+            characterId.value = id
+            getCharacterbyId()
         }
         _detailsState.value = CharacterDetailsState(isLoading = true)
 
     }
 
-    fun getCharacterbyId(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+    fun getCharacterbyId() = viewModelScope.launch {
 
-        val result = getCharacterDetailsUsecase(id)
+        val result = getCharacterDetailsUsecase(characterId.value)
 
         result.onSuccess { details ->
             _detailsState.value = CharacterDetailsState(data = details)

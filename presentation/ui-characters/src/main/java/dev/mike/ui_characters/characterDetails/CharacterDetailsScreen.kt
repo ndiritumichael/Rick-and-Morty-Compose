@@ -34,7 +34,7 @@ fun CharacterDetailsScreen(
 
     val statusBarcolor = when (isSystemInDarkTheme()) {
 
-        true -> colorPallete?.darkVibrantSwatch?.rgb
+        true -> colorPallete?.darkMutedSwatch?.rgb
         false -> colorPallete?.lightVibrantSwatch?.rgb
     } ?: 0
 
