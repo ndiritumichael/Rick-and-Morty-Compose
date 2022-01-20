@@ -29,7 +29,7 @@ class CharacterDetailsViewModel @Inject constructor(
 
     }
 
-    fun getCharacterbyId() = viewModelScope.launch {
+    private fun getCharacterbyId() = viewModelScope.launch {
 
         val result = getCharacterDetailsUsecase(characterId.value)
 
