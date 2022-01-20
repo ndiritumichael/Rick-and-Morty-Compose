@@ -4,7 +4,6 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-
 import androidx.navigation.*
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
@@ -24,34 +23,36 @@ fun NavGraphBuilder.charactersGraph(
 
         composable(
             route = Characters.CHARACTERlIST,
-            enterTransition = { //initial: NavBackStackEntry, target: NavBackStackEntry ->
+            enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
                 slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700))
             },
-            exitTransition = {//initial: NavBackStackEntry, target: NavBackStackEntry ->
+            exitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
                 slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = tween(700))
             },
-            popEnterTransition = {//initial: NavBackStackEntry, target: NavBackStackEntry ->
+            popEnterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
                 slideInHorizontally(initialOffsetX = { -1000 }, animationSpec = tween(700))
             },
-            popExitTransition = {//initial: NavBackStackEntry, target: NavBackStackEntry ->
+            popExitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
                 slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = tween(700))
             }
 
         ) {
 
-            CharactersList ({navHostController.navigate(Characters.CHARACTERSEARCH)}){ characterId ->
-                navHostController.navigate(Characters.CHARACTERDETAILS+"/$characterId") {
+            CharactersList({
+                navHostController.navigate(Characters.CHARACTERSEARCH)
+            }) { characterId ->
+                navHostController.navigate(Characters.CHARACTERDETAILS + "/$characterId") {
                     launchSingleTop
                 }
             }
         }
 
         composable(
-            route = Characters.CHARACTERDETAILS+"/{characterId}",
+            route = Characters.CHARACTERDETAILS + "/{characterId}",
             arguments = listOf(
                 navArgument(
                     name = "characterId",
@@ -65,16 +66,15 @@ fun NavGraphBuilder.charactersGraph(
 
                 CharacterDetailsScreen(
 
-                    {navHostController.popBackStack()}
+                    { navHostController.popBackStack() }
                 )
             }
         }
 
-        composable(Characters.CHARACTERSEARCH){
+        composable(Characters.CHARACTERSEARCH) {
 
             CharactersSearch {
                 navHostController.navigateUp()
-
             }
         }
     }
