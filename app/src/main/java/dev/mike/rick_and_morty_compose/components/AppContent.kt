@@ -7,6 +7,8 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.google.accompanist.insets.navigationBarsPadding
+import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dev.mike.common.Characters
 import dev.mike.common.Episodes
@@ -31,6 +33,10 @@ fun AppContent() {
         .currentBackStackEntryAsState().value?.destination?.route in bottomScreens
 
     Scaffold(
+        modifier = Modifier
+            .statusBarsPadding()
+            .navigationBarsPadding()
+        ,
         bottomBar = {
             if (showNavBar) {
                 BottomNavigationBar(navController)
