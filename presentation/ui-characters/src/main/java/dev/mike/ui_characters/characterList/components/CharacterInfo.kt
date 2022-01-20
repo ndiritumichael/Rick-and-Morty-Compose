@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.palette.graphics.Palette
 import coil.request.ImageRequest
 import com.skydoves.landscapist.CircularReveal
@@ -66,19 +67,26 @@ fun ImageCard(imageLink: String, modifier: Modifier, bitPallette: (Palette) -> U
             .build(),
         alignment = Alignment.Center,
         loading = {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .align(Alignment.Center)
-            )
+            ConstraintLayout(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                val indicator = createRef()
+                CircularProgressIndicator(
+                    modifier = Modifier.constrainAs(indicator) {
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                )
+            }
         },
         circularReveal = CircularReveal(
             duration = 300,
         ),
         modifier = modifier,
-        bitmapPalette = BitmapPalette{ pallette ->
+        bitmapPalette = BitmapPalette { pallette ->
             bitPallette(pallette)
-
-
         }
 
     )
