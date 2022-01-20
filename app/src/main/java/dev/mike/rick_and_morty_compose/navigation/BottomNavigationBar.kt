@@ -30,11 +30,11 @@ fun BottomNavigationBar(navHostController: NavHostController) {
         modifier = Modifier
             .fillMaxWidth()
             .alpha(0.85F),
-        elevation = 10.dp,
+        elevation = 16.dp,
         shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
     ) {
 
-        BottomNavigation(backgroundColor = Color.White) {
+        BottomNavigation( backgroundColor = MaterialTheme.colors.onPrimary) {
             bottomScreens.map {
                 val isSelected = navHostController
                     .currentBackStackEntryAsState().value?.destination?.route == it.route
