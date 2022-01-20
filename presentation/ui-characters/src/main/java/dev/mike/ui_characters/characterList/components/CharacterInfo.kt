@@ -14,43 +14,50 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.palette.graphics.Palette
 import coil.request.ImageRequest
 import com.skydoves.landscapist.CircularReveal
 import com.skydoves.landscapist.coil.CoilImage
+import com.skydoves.landscapist.palette.BitmapPalette
 import dev.mike.domain.model.Character
 
 @Composable
-fun CharacterUI(character: Character,onClick:(Int)-> Unit) {
+fun CharacterUI(character: Character, onClick: (Int) -> Unit) {
     AnimatedVisibility(visible = true) {
-        Card(modifier = Modifier
-            .padding(8.dp)
-            .clickable {
-                onClick(character.id)
-            }
-            .fillMaxWidth(),
+        Card(
+            modifier = Modifier
+                .padding(8.dp)
+                .clickable {
+                    onClick(character.id)
+                }
+                .fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
-        elevation = 8.dp) {
+            elevation = 8.dp
+        ) {
             Row() {
-                ImageCard(imageLink = character.imageUrl,
+                ImageCard(
+                    imageLink = character.imageUrl,
                     modifier = Modifier
-                        .fillMaxWidth(0.35f))
-                CharacterInfo(character = character,modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(4.dp))
+                        .fillMaxWidth(0.35f)
+                )
+                CharacterInfo(
+                    character = character,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp)
+                )
             }
         }
-
     }
 }
 
-
 @Composable
-fun ImageCard(imageLink: String, modifier: Modifier) {
+fun ImageCard(imageLink: String, modifier: Modifier, bitPallette: (Palette) -> Unit = {}) {
     CoilImage(
         imageRequest =
         ImageRequest
@@ -60,15 +67,28 @@ fun ImageCard(imageLink: String, modifier: Modifier) {
             .build(),
         alignment = Alignment.Center,
         loading = {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .align(Alignment.Center)
-            )
+            ConstraintLayout(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                val indicator = createRef()
+                CircularProgressIndicator(
+                    modifier = Modifier.constrainAs(indicator) {
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                )
+            }
         },
         circularReveal = CircularReveal(
             duration = 300,
         ),
-        modifier = modifier
+        modifier = modifier,
+        bitmapPalette = BitmapPalette { pallette ->
+            bitPallette(pallette)
+        }
+
     )
 }
 
@@ -80,13 +100,13 @@ fun CharacterInfo(character: Character, modifier: Modifier = Modifier) {
         else -> Color.Gray
     }
     Column(modifier = modifier) {
-        Text(text = character.name, fontWeight = FontWeight.Bold,style = MaterialTheme.typography.h6)
+        Text(text = character.name, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.h6)
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "Origin", fontSize =  13.sp)
+        Text(text = "Origin", fontSize = 13.sp)
         Text(text = character.origin)
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(text = "Status", fontSize =  13.sp)
+        Text(text = "Status", fontSize = 13.sp)
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Box(
                 modifier = Modifier
@@ -94,8 +114,6 @@ fun CharacterInfo(character: Character, modifier: Modifier = Modifier) {
                     .background(color = color, shape = CircleShape)
             )
             Text(text = character.status + " - " + character.species)
-
         }
-
     }
 }

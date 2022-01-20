@@ -30,13 +30,17 @@ fun CharactersListColumn(items: LazyPagingItems<Character>, navigate: (Int) -> U
                 loadState.refresh is LoadState.Loading -> {
                     item {
                         Box(
-                            modifier = Modifier.fillMaxSize()
-                                .padding(top = 50.dp,
-                                    bottom = 50.dp),
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(
+                                    top = 50.dp,
+                                    bottom = 50.dp
+                                ),
                             contentAlignment = Alignment.Center
                         ) {
-                            CircularProgressIndicator(modifier = Modifier.height(30.dp)
-                                )
+                            CircularProgressIndicator(
+                                modifier = Modifier.height(30.dp)
+                            )
                         }
                     }
                 }
@@ -60,11 +64,20 @@ fun CharactersListColumn(items: LazyPagingItems<Character>, navigate: (Int) -> U
                             modifier = Modifier.fillMaxWidth(),
                             contentAlignment = Alignment.BottomCenter
                         ) {
-                            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(text = errorMessage.error.localizedMessage!!)
-                                Button(onClick = { retry() }) {
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                val errorText =
+                                    if (errorMessage.error.localizedMessage!!
+                                        .contains("404")
+                                    ) "Character not Found"
+                                    else
+                                        errorMessage.error.localizedMessage
+                                Text(errorText)
+                               /* Button(onClick = { retry() }) {
                                     Text(text = "Try Again")
-                                }
+                                }*/
                             }
                         }
                     }
@@ -78,7 +91,10 @@ fun CharactersListColumn(items: LazyPagingItems<Character>, navigate: (Int) -> U
                             modifier = Modifier.fillMaxWidth(),
                             contentAlignment = Alignment.BottomCenter
                         ) {
-                            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
                                 Text(text = errorMessage.error.localizedMessage!!)
                                 Button(onClick = { retry() }) {
                                     Text(text = "Try Again")

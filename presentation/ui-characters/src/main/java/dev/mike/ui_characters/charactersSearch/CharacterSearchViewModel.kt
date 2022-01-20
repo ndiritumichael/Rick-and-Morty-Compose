@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.mike.domain.usecases.GetCharactersUseCase
 import dev.mike.ui_characters.characterList.CharacterListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -23,6 +24,8 @@ class CharacterSearchViewModel @Inject constructor(
 
     private val _searchString = MutableStateFlow("")
     val searchString = _searchString.asStateFlow()
+
+    private var searchJob : Job? = null
 
     @ExperimentalCoroutinesApi
     private val searchResponse = searchString.flatMapLatest { searchName ->
@@ -60,11 +63,11 @@ class CharacterSearchViewModel @Inject constructor(
     }
 
     fun searchCharacterbyName(searchString: String) {
-        viewModelScope.launch {
-            _searchResult.value = CharacterListState(
-                dataList = null
-            )
-            delay(1000)
+        searchJob?.cancel()
+       searchJob = viewModelScope.launch {
+           delay(500)
+
+
             val response = characterListUseCase.invoke(searchString)
             _searchResult.value = CharacterListState(
                 dataList = response

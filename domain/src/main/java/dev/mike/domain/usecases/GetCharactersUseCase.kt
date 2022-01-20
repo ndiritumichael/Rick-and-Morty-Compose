@@ -10,7 +10,7 @@ class GetCharactersUseCase @Inject constructor(
     private val characterRepository: CharactersRepository
 ) {
 
-    suspend operator fun invoke(name:String? = null): Flow<PagingData<Character>> {
+    suspend operator fun invoke(name: String? = null): Flow<PagingData<Character>> {
         return characterRepository.getAllCharacters(name)
     }
 }

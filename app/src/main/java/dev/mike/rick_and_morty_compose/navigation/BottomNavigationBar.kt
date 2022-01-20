@@ -1,5 +1,6 @@
 package dev.mike.rick_and_morty_compose.navigation
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,19 +24,25 @@ fun BottomNavigationBar(navHostController: NavHostController) {
         NavigationItem.EpisodesScreen,
     )
 
+
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .alpha(0.85F),
-        elevation = 10.dp,
+        elevation = 16.dp,
         shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
     ) {
 
-        BottomNavigation(backgroundColor = Color.White) {
+        BottomNavigation( backgroundColor = MaterialTheme.colors.onPrimary) {
             bottomScreens.map {
+                val isSelected = navHostController
+                    .currentBackStackEntryAsState().value?.destination?.route == it.route
+                Log.d("bottomnav","${navHostController
+                    .currentBackStackEntryAsState().value?.destination?.route}")
+
                 BottomNavigationItem(
-                    selected = navHostController
-                        .currentBackStackEntryAsState().value?.destination?.route == it.route,
+                    selected = isSelected,
                     onClick = {
                         navHostController.navigate(
                             it.route
@@ -51,10 +58,11 @@ fun BottomNavigationBar(navHostController: NavHostController) {
                         Icon(painter = painterResource(id = it.icon), contentDescription = "bottom Bar Icon", modifier = Modifier.size(24.dp))
                     },
                     label = {
-                        Text(text = it.title)
+                        Text(text = it.title, color = MaterialTheme.colors.primary)
                     },
-                    alwaysShowLabel = false,
-                    unselectedContentColor = MaterialTheme.colors.primaryVariant,
+                    alwaysShowLabel = isSelected,
+                    unselectedContentColor = Color.LightGray,
+                    selectedContentColor = MaterialTheme.colors.primary
                 )
             }
         }

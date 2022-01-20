@@ -12,6 +12,7 @@ buildscript {
         paging_compose = "1.0.0-alpha14"
         navigation_animation = "0.21.3-beta"
         landscapist_coil="1.4.4"
+        accompanist = "0.22.0-rc"
 
     }
     repositories {
@@ -19,7 +20,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.3"
+        classpath 'com.android.tools.build:gradle:7.0.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
