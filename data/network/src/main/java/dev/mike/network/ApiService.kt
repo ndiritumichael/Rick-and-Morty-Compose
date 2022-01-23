@@ -2,7 +2,10 @@ package dev.mike.network
 
 import dev.mike.network.models.characters.CharactersDto
 import dev.mike.network.models.characters.singleCharacter.SingleCharacterDto
-import retrofit2.Response
+import dev.mike.network.models.episodes.allepisodes.Episodes
+import dev.mike.network.models.episodes.singleepisode.SingleEpisodeDTO
+
+
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -17,11 +20,16 @@ interface ApiService {
 
     @GET("character/{character_id}")
     suspend fun getCharacterDetails(
-        @Path("character_id") character_id: Int
+        @Path("character_id") characterId: Int
     ): SingleCharacterDto
 
-    @GET("character")
-    suspend fun filterCharacters(
-        @Query("name") name: String
-    ):CharactersDto
+
+
+    @GET("episodes")
+    suspend fun getEpisodes():Episodes
+
+    @GET("episodes/{episode}")
+    suspend fun getEpisode(
+        @Path("episode") episode:List<Int>
+    ):List<SingleEpisodeDTO>
 }
