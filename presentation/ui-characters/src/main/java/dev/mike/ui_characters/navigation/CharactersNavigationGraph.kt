@@ -11,7 +11,9 @@ import dev.mike.common.Characters
 import dev.mike.ui_characters.CharactersList
 import dev.mike.ui_characters.characterDetails.CharacterDetailsScreen
 import dev.mike.ui_characters.charactersSearch.CharactersSearch
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @ExperimentalAnimationApi
 fun NavGraphBuilder.charactersGraph(
     navHostController: NavHostController
@@ -73,7 +75,13 @@ fun NavGraphBuilder.charactersGraph(
 
         composable(Characters.CHARACTERSEARCH) {
 
-            CharactersSearch {
+            CharactersSearch(navigate = {
+                    characterId ->
+                navHostController.navigate(Characters.CHARACTERDETAILS + "/$characterId") {
+                    launchSingleTop
+                }
+
+            }) {
                 navHostController.navigateUp()
             }
         }
