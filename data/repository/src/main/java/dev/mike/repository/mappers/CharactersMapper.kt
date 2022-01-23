@@ -1,5 +1,6 @@
 package dev.mike.repository.mappers
 
+import android.net.Uri
 import dev.mike.domain.model.Character
 import dev.mike.domain.model.CharacterDetails
 import dev.mike.network.models.characters.CharactersDto
@@ -27,7 +28,11 @@ fun SingleCharacterDto.toCharacter(): CharacterDetails {
         image = image,
         gender = gender,
         status = status,
-        episode = episode,
+        episode = episode.map { episode ->
+            val uri = Uri.parse(episode)
+            uri.getQueryParameter("episode")?.toInt() ?: 1
+
+        },
         location = location.name,
         origin = origin.name,
         species = species,
