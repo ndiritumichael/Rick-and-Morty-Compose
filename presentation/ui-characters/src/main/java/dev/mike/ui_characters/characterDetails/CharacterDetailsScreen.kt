@@ -8,10 +8,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
+
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -32,38 +33,36 @@ fun CharacterDetailsScreen(
     viewModel: CharacterDetailsViewModel = hiltViewModel(),
 
 ) {
-    val systemuicontroller = rememberSystemUiController()
+    val systemUiController = rememberSystemUiController()
 
-    var colorPallete by remember {
+    var colorPalette by remember {
         mutableStateOf<Palette?>(null)
     }
 
-    val vibrantcolor = when (isSystemInDarkTheme()) {
+    val vibrantColor = when (isSystemInDarkTheme()) {
 
-        true -> colorPallete?.darkVibrantSwatch?.rgb
-        false -> colorPallete?.lightVibrantSwatch?.rgb
+        true -> colorPalette?.darkVibrantSwatch?.rgb
+        false -> colorPalette?.lightVibrantSwatch?.rgb
     } ?: 0
     val mutedColor = when (isSystemInDarkTheme()) {
 
-        true -> colorPallete?.darkMutedSwatch?.rgb
-        false -> colorPallete?.lightMutedSwatch?.rgb
+        true -> colorPalette?.darkMutedSwatch?.rgb
+        false -> colorPalette?.lightMutedSwatch?.rgb
     } ?: 0
 
     val gradient = Brush.verticalGradient(
         listOf(
-            Color(vibrantcolor),
+            Color(vibrantColor),
             Color(mutedColor)
         )
 
     )
 
-    LaunchedEffect(key1 = vibrantcolor) {
-        systemuicontroller.setStatusBarColor(color = Color(vibrantcolor))
+    LaunchedEffect(key1 = vibrantColor) {
+        systemUiController.setStatusBarColor(color = Color(vibrantColor))
     }
 
-    /*  LaunchedEffect(key1 = id) {
-        viewModel.getCharacterbyId(id)
-    }*/
+
 
     val detailsState = viewModel.detailsState.value
 
@@ -91,7 +90,8 @@ fun CharacterDetailsScreen(
 
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
 
             ) {
                 Box(
@@ -113,11 +113,11 @@ fun CharacterDetailsScreen(
                             .clip(
                                 RoundedCornerShape(8.dp)
                             )
-                    ) { pallette ->
-                        colorPallete = pallette
+                    ) { palette ->
+                        colorPalette = palette
                     }
                 }
-                MediumSpacer()
+
 
                 Text(
                     text = character.name,
@@ -126,7 +126,7 @@ fun CharacterDetailsScreen(
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.fillMaxWidth()
                 )
-                MediumSpacer()
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center,
@@ -140,20 +140,66 @@ fun CharacterDetailsScreen(
 
                     Box(
                         modifier = Modifier
-                            .size(22.dp)
+                            .size(14.dp)
                             .clip(CircleShape)
                             .background(color)
                     )
                     MediumSpacer()
-                    Text(text = character.status, style = MaterialTheme.typography.h6)
+                    Text(text = character.status, style = MaterialTheme.typography.body1)
+
+
                 }
+
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+                        Text(text = character.species,style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold)
+                        Text(text ="Species" )
+
+                    }
+
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(text = character.gender,style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold)
+                        Text(text ="Gender" )
+
+
+                    }
+
+                }
+
+                Row(modifier =Modifier
+                    .padding(horizontal = 16.dp).fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically) {
+
+                    Column(
+
+
+                    ) {
+
+                        Text(
+                            text = character.location,
+                            style = MaterialTheme.typography.body1,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(text = "Location", style = MaterialTheme.typography.subtitle2)
+
+                    }
+                    IconButton(onClick = {  }) {
+                        Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "view locations")
+
+                    }
+                }
+                
+                
+                
             }
 
             Surface(
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .padding(8.dp)
-                    .alpha(0.7f),
+                    ,
                 shape = CircleShape
             ) {
                 IconButton(onClick = navigate, modifier = Modifier.padding(4.dp)) {
@@ -165,4 +211,18 @@ fun CharacterDetailsScreen(
             }
         }
     }
+}
+
+
+@Composable
+fun CharacterMeta(header:String,description:String){
+    
+    Row(modifier = Modifier.fillMaxWidth()) {
+        
+        Text(text = header,modifier = Modifier.fillMaxWidth(0.4f), style = MaterialTheme.typography.body1)
+        Text(text = description,modifier = Modifier.fillMaxWidth(), style = MaterialTheme.typography.h5)
+
+    }
+    
+    
 }

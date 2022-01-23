@@ -14,6 +14,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun CharactersSearch(
     viewModel: CharacterSearchViewModel = hiltViewModel(),
+    navigate: (Int) -> Unit,
     navigateUp: () -> Unit
 ) {
     val state = viewModel.searchResult.value
@@ -41,7 +42,9 @@ fun CharactersSearch(
     ) {
 
         characters?.let { searchCharacters ->
-            CharactersListColumn(items = searchCharacters)
+            CharactersListColumn(items = searchCharacters){id->
+                navigate(id)
+            }
         }
     }
 }

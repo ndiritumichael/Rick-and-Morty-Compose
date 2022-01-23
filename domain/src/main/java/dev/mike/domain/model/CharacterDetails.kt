@@ -2,7 +2,7 @@ package dev.mike.domain.model
 
 data class CharacterDetails(
 
-    val episode: List<String>,
+    val episode: List<Int>,
 
     val gender: String,
 
