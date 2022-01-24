@@ -28,8 +28,13 @@ interface ApiService {
     @GET("episodes")
     suspend fun getEpisodes():Episodes
 
-    @GET("episodes/{episode}")
+    @GET("episode/{episode}")
     suspend fun getEpisode(
-        @Path("episode") episode:List<Int>
+        @Path("episode") episode:String
     ):List<SingleEpisodeDTO>
+
+    @GET("episode/{episode}")
+    suspend fun getoneEpisode(
+        @Path("episode") episode:String
+    ):SingleEpisodeDTO
 }
