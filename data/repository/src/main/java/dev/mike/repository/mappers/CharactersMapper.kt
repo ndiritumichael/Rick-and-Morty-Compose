@@ -6,6 +6,7 @@ import dev.mike.domain.model.CharacterDetails
 import dev.mike.network.models.characters.CharactersDto
 import dev.mike.network.models.characters.ResultDto
 import dev.mike.network.models.characters.singleCharacter.SingleCharacterDto
+import dev.mike.repository.utils.getIntFromUrl
 
 fun ResultDto.toCharacter(): Character {
 
@@ -29,8 +30,7 @@ fun SingleCharacterDto.toCharacter(): CharacterDetails {
         gender = gender,
         status = status,
         episode = episode.map { episode ->
-            val uri = Uri.parse(episode)
-            uri.getQueryParameter("episode")?.toInt() ?: 1
+          getIntFromUrl(episode) ?: 0
 
         },
         location = location.name,

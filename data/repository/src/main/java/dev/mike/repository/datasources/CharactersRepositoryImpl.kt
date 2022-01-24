@@ -34,8 +34,8 @@ class CharactersPagingSource(
         val pageNumber = params.key ?: 1
         return try {
             val charactersResponse = apiService.getCharacters(pageNumber, name)
-            val characters = charactersResponse.results.map { character ->
-                character.toCharacter()
+            val characters = charactersResponse.results.map { characterDto ->
+                characterDto.toCharacter()
             }
             var nextPage: Int? = null
             if (charactersResponse.info.next != null) {
