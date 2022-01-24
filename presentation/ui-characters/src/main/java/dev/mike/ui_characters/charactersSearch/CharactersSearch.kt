@@ -23,10 +23,10 @@ fun CharactersSearch(
 
     val searchString = viewModel.searchString.collectAsState().value
     LaunchedEffect(key1 = searchString) {
-        if (searchString.length >= 3) {
+        if (searchString != "" ) {
 
-            viewModel.searchCharacterbyName(searchString)
-        }
+            viewModel.searchCharacterbyName(searchString)}
+
     }
     Scaffold(
         topBar =

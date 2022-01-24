@@ -4,15 +4,18 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.navigation.*
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
 import dev.mike.common.Characters
+import dev.mike.common.Episodes
 import dev.mike.ui_characters.CharactersList
 import dev.mike.ui_characters.characterDetails.CharacterDetailsScreen
 import dev.mike.ui_characters.charactersSearch.CharactersSearch
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalMaterialApi
 @ExperimentalCoroutinesApi
 @ExperimentalAnimationApi
 fun NavGraphBuilder.charactersGraph(
@@ -67,6 +70,12 @@ fun NavGraphBuilder.charactersGraph(
             characterId?.let {
 
                 CharacterDetailsScreen(
+                    navigateToAllEpisodes = {
+                                            navHostController.navigate(Episodes.EPISODESGRAPH)
+                    },
+                    navigateToSpecificEpisode = {
+
+                    },
 
                     { navHostController.popBackStack() }
                 )

@@ -3,8 +3,10 @@ package dev.mike.ui_characters.charactersSearch
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.mike.domain.model.Character
 import dev.mike.domain.usecases.GetCharactersUseCase
 import dev.mike.ui_characters.characterList.CharacterListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,30 +30,34 @@ class CharacterSearchViewModel @Inject constructor(
     private var searchJob : Job? = null
 
     @ExperimentalCoroutinesApi
-    private val searchResponse = searchString.flatMapLatest { searchName ->
-        // delay(1000)
-
-        characterListUseCase.invoke(searchName).cachedIn(viewModelScope)
-    }.shareIn(viewModelScope, SharingStarted.WhileSubscribed(), replay = 1)
-
-    init {
-        viewModelScope.launch {
-          /*  searchString.flatMapLatest { name ->
-                //searchCharacterbyName(name)
+     val searchResponse = searchString.filter {
+        it!=""
+    }.flatMapLatest { searchName ->
+      characterListUseCase.invoke(searchName).cachedIn(viewModelScope)
+    }
 
 
-            }*/
 
-            // _searchResult.value = CharacterListState(isLoading = true)
-           /* searchResponse.onEach { results ->
-                _searchResult.value = CharacterListState(
-                    dataList = flow {
-                        emit(results)
-                    }
-                )
-            }*/
+    fun searchCharacterbyName(searchString: String) {
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            if(searchString.length>3) delay(500)
+
+
+            val response = characterListUseCase.invoke(searchString)
+            _searchResult.value = CharacterListState(
+                dataList = response
+            )
+
         }
     }
+
+
+
+
+
+
+
 
     fun searchCharacter(name: String) {
         if (name == "") {
@@ -62,16 +68,5 @@ class CharacterSearchViewModel @Inject constructor(
         _searchString.value = name
     }
 
-    fun searchCharacterbyName(searchString: String) {
-        searchJob?.cancel()
-       searchJob = viewModelScope.launch {
-           delay(500)
 
-
-            val response = characterListUseCase.invoke(searchString)
-            _searchResult.value = CharacterListState(
-                dataList = response
-            )
-        }
-    }
 }
