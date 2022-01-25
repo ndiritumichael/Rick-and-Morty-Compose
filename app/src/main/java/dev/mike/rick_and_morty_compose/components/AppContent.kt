@@ -17,6 +17,7 @@ import dev.mike.rick_and_morty_compose.navigation.BottomNavigationBar
 import dev.mike.rick_and_morty_compose.navigation.MainNavigation
 import dev.mike.rick_and_morty_compose.navigation.NavigationItem
 
+@ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @Composable
 fun AppContent() {
@@ -43,7 +44,7 @@ fun AppContent() {
             }
         }
     ) { padding ->
-        Box(modifier = Modifier.padding(padding)) {
+        Box(/*modifier = Modifier.padding(padding)*/) {
             MainNavigation(navhostController = navController)
         }
     }
