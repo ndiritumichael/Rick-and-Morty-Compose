@@ -19,7 +19,7 @@ An android app built using Kotlin that consumes [Rick and Morty API](https://ric
     - [Libraries](##libraries)
     - [Extras](##extras)
 - [Helpful Resources](#helpful-resources)
-- [Screenshots](#screenshots)
+- [Demo](#demo)
 
 ## Prerequisite.
 
@@ -148,4 +148,13 @@ In this section i've included some resources ie. articles and GitHub repositorie
 6. [Foodies](https://github.com/LinusMuema/foodies/) Github Repo by [Linus Moose](https://github.com/LinusMuema) to show how to build UIs with Compose
 7. [Pokedex](https://github.com/ronnieotieno/PokeApi-Pokedex) by [Ronnie Otieno](https://github.com/ronnieotieno) demonstrating how to properly use Jetpack Components
 
+
+
+## Demo
+These are the app's screenshots and video:
+
+
+<img src="assets/characters_light.jpg" width="250"/> <img src="assets/characters_dark.jpg" width="250"/> 
+
+<img src="assets/details_light.jpg" width="250"/> <img src="assets/details_dark" width="250"/> 
 
