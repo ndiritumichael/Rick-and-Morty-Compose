@@ -158,5 +158,5 @@ These are the app's screenshots and video:
 
 <img src="assets/details_light.jpg" width="250"/> <img src="assets/details_dark.jpg" width="250"/> 
 
-https://raw.githubusercontent.com/ndiritumichael/Rick-and-Morty-Compose/blob/master/assets/22-01-25-12-02-28.mp4
+https://github.com/ndiritumichael/Rick-and-Morty-Compose/blob/master/assets/22-01-25-12-02-28.mp4
 
