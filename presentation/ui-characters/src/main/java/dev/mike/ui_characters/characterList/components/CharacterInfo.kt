@@ -1,6 +1,7 @@
 package dev.mike.ui_characters.characterList.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -31,6 +32,7 @@ fun CharacterUI(character: Character, onClick: (Int) -> Unit) {
     AnimatedVisibility(visible = true) {
         Card(
             modifier = Modifier
+                .animateContentSize()
                 .padding(8.dp)
                 .clickable {
                     onClick(character.id)
