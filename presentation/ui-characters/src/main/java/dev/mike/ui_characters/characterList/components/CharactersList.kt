@@ -1,7 +1,10 @@
 package dev.mike.ui_characters.characterList.components
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
@@ -15,8 +18,14 @@ import androidx.paging.compose.items
 import dev.mike.domain.model.Character
 
 @Composable
-fun CharactersListColumn(items: LazyPagingItems<Character>, navigate: (Int) -> Unit = {}) {
-    LazyColumn {
+fun CharactersListColumn(
+    items: LazyPagingItems<Character>,
+    listState: LazyListState = rememberLazyListState(),
+    navigate: (Int) -> Unit = {}
+) {
+    LazyColumn(state = listState,
+        modifier = Modifier
+        .animateContentSize()) {
 
         items(items) { character ->
             CharacterUI(character = character!!) { id ->
