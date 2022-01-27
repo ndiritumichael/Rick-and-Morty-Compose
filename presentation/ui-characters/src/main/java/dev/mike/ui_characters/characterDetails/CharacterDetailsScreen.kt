@@ -22,7 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextAlign import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -199,7 +199,7 @@ fun CharacterDetailsScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
-                    Column{
+                    Column {
 
                         Text(
                             text = character.location,
@@ -258,9 +258,12 @@ fun CharacterDetailsScreen(
                                     .fillMaxWidth()
                                     .padding(horizontal = 8.dp, vertical = 4.dp)
                             ) {
-                                Row(verticalAlignment = Alignment.CenterVertically,modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 8.dp, vertical = 4.dp)) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                                ) {
 
                                     Image(
                                         imageVector = Icons.Default.Face,
@@ -268,7 +271,7 @@ fun CharacterDetailsScreen(
                                         modifier = Modifier.size(32.dp)
                                     )
                                     MediumSpacer()
-                                    Column() {
+                                    Column {
                                         Text(text = episode.episode)
                                         Text(text = episode.name, fontWeight = FontWeight.Bold)
 
@@ -322,23 +325,53 @@ fun CharacterDetailsScreen(
 }
 
 
+@Preview(showSystemUi = true)
 @Composable
-fun CharacterMeta(header: String, description: String) {
+fun CharacterMeta(
+    header: String = "Interactive Mode",
+    description: String = "Trying out Interactive mode in BumbleBee"
+) {
 
-    Row(modifier = Modifier.fillMaxWidth()) {
+    var a by remember {
+        mutableStateOf(1)
+    }
+
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
         Text(
             text = header,
             modifier = Modifier.fillMaxWidth(0.4f),
-            style = MaterialTheme.typography.body1
+            style = MaterialTheme.typography.h6,
+            textAlign = TextAlign.Center
         )
-        Text(
-            text = description,
-            modifier = Modifier.fillMaxWidth(),
-            style = MaterialTheme.typography.h5
-        )
+        CustomText(text = description)
+
+        CustomText(text = "The value of a: $a ")
+
+        Button(onClick = { a++ }) {
+            Text("Click To Add")
+        }
+
+
 
     }
 
 
+}
+
+@Composable
+fun CustomText(text: String) {
+
+
+    Text(
+        text,
+        modifier = Modifier.fillMaxWidth(),
+        style = MaterialTheme.typography.body1,
+        textAlign = TextAlign.Center
+    )
 }

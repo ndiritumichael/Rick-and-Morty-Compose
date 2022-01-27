@@ -44,8 +44,8 @@ fun AppContent() {
             }
         }
     ) { padding ->
-        Box(/*modifier = Modifier.padding(padding)*/) {
+
             MainNavigation(navhostController = navController)
-        }
+
     }
 }

@@ -58,4 +58,6 @@ dependencies {
     api "com.google.accompanist:accompanist-insets-ui:$accompanist"
 
     api "com.google.accompanist:accompanist-systemuicontroller:$accompanist"
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 }

@@ -2,7 +2,7 @@
 buildscript {
     ext {
         compose_version = '1.0.5'
-        hilt_version = "2.38.1"
+        hilt_version = "2.40"
         androidx_hilt = '1.0.0'
         hilt_lifecycle = "1.0.0-alpha03"
         retrofit = "2.9.0"
@@ -20,7 +20,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'com.android.tools.build:gradle:7.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"

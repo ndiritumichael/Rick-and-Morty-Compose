@@ -43,5 +43,7 @@ dpresentation/ui-characters/src/main/java/dev/mike/ui_characters/charactersSearc
 lpresentation/ui-characters/src/main/java/dev/mike/ui_characters/charactersSearch/CharacterSearchViewModel.kt,1/8/18e6e8a58174427065916d2a083ad69149d67041
 }
 Mdata/repository/src/main/java/dev/mike/repository/mappers/CharactersMapper.kt,9/d/9dd1c816ae53fea718395e989bc4bae4aac679be
-•
-epresentation/ui-characters/src/main/java/dev/mike/ui_characters/characterList/CharactersListScreen.kt,5/6/56e5e4dcdc8276f200af07e495e1c144fe59efa2
+
+Odomain/src/main/java/dev/mike/domain/repositories/CharacterDetailsRepository.kt,7/7/77bd1ab2e412ac0da2a2a81bd4644b0e85043344
+q
+Aapp/src/main/java/dev/mike/rick_and_morty_compose/MainActivity.kt,7/c/7c2f3dcd91abfc6c2c294871912cfdc140fa83a0

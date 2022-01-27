@@ -11,7 +11,9 @@ import dev.mike.common.Characters
 import dev.mike.common.Episodes
 import dev.mike.common.Locations
 import dev.mike.ui_characters.navigation.charactersGraph
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @Composable

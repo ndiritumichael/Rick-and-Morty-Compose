@@ -56,7 +56,22 @@ fun NavGraphBuilder.charactersGraph(
             }
         }
 
-        composable(
+        composable(   enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
+
+            slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700))
+        },
+            exitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
+
+                slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = tween(700))
+            },
+            popEnterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
+
+                slideInHorizontally(initialOffsetX = { -1000 }, animationSpec = tween(700))
+            },
+            popExitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
+
+                slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = tween(700))
+            },
             route = Characters.CHARACTERDETAILS + "/{characterId}",
             arguments = listOf(
                 navArgument(
