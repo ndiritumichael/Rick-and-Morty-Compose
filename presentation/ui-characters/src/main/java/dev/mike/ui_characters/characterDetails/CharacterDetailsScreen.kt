@@ -1,12 +1,12 @@
 package dev.mike.ui_characters.characterDetails
 
-import androidx.compose.foundation.Image
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
-
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -17,12 +17,13 @@ import androidx.compose.material.icons.filled.Face
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -30,6 +31,7 @@ import androidx.palette.graphics.Palette
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.mike.commons.components.MediumSpacer
 import dev.mike.ui_characters.characterList.components.ImageCard
+import kotlin.math.min
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalMaterialApi
@@ -43,19 +45,40 @@ fun CharacterDetailsScreen(
 
     viewModel: CharacterDetailsViewModel = hiltViewModel(),
 
-    ) {
+) {
+    val systeminDarkMode = isSystemInDarkTheme()
+    val lazyListState = rememberLazyListState()
+    val scrollOffset = min(
+        1f.coerceAtMost(1f),
+        (1 - (lazyListState.firstVisibleItemScrollOffset / 2000f + lazyListState.firstVisibleItemIndex)).coerceAtLeast(
+            0f
+        )
+    )
+
+    val imageSize by animateFloatAsState(
+        targetValue = 0.4f * scrollOffset,
+        animationSpec =   tween(
+            durationMillis = 300,
+            delayMillis = 50,
+            easing = FastOutSlowInEasing
+        )
+        /*spring(
+            dampingRatio = Spring.DampingRatioHighBouncy,
+            stiffness = Spring.StiffnessMedium
+        ) */// tween(easing = FastOutLinearInEasing)
+    )
     val systemUiController = rememberSystemUiController()
 
     var colorPalette by remember {
         mutableStateOf<Palette?>(null)
     }
 
-    val vibrantColor = when (isSystemInDarkTheme()) {
+    val vibrantColor = when (systeminDarkMode) {
 
         true -> colorPalette?.darkVibrantSwatch?.rgb
         false -> colorPalette?.lightVibrantSwatch?.rgb
     } ?: 0
-    val mutedColor = when (isSystemInDarkTheme()) {
+    val mutedColor = when (systeminDarkMode) {
 
         true -> colorPalette?.darkMutedSwatch?.rgb
         false -> colorPalette?.lightMutedSwatch?.rgb
@@ -72,27 +95,29 @@ fun CharacterDetailsScreen(
     val episodesList =
         viewModel.episodesList.collectAsState(initial = CharacterEpisodesState(isLoading = true)).value
 
-    LaunchedEffect(key1 = vibrantColor) {
-        systemUiController.setStatusBarColor(color = Color(vibrantColor))
-    }
+    LaunchedEffect(key1 = imageSize, key2 = vibrantColor) {
 
+        systemUiController.setStatusBarColor(
+            color = if (imageSize == 0f) Color.Transparent else Color(vibrantColor),
+            darkIcons = systeminDarkMode.not()
+        )
+    }
 
     val detailsState = viewModel.detailsState.value
 
     detailsState.errorMessage?.let { Text(text = it) }
-    when (detailsState.isLoading) {
-        true -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        color = Color.Gray
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
+    if (detailsState.isLoading) {
 
-                CircularProgressIndicator(modifier = Modifier.size(30.dp))
-            }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    color = Color.Gray
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+
+            CircularProgressIndicator(modifier = Modifier.size(30.dp))
         }
     }
     Box(
@@ -110,7 +135,7 @@ fun CharacterDetailsScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.4f)
+                        .fillMaxHeight(imageSize)
                         .background(
                             brush = gradient,
                             shape = RoundedCornerShape(
@@ -126,11 +151,16 @@ fun CharacterDetailsScreen(
                             .clip(
                                 RoundedCornerShape(8.dp)
                             )
+                            .graphicsLayer {
+
+                                alpha = min(1f, 1 - (scrollOffset / 600f))
+                                translationY = -scrollOffset * 0.1f
+
+                            }
                     ) { palette ->
                         colorPalette = palette
                     }
                 }
-
 
                 Text(
                     text = character.name,
@@ -159,8 +189,6 @@ fun CharacterDetailsScreen(
                     )
                     MediumSpacer()
                     Text(text = character.status, style = MaterialTheme.typography.body1)
-
-
                 }
 
                 Row(
@@ -175,7 +203,6 @@ fun CharacterDetailsScreen(
                             fontWeight = FontWeight.Bold
                         )
                         Text(text = "Species")
-
                     }
 
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -185,10 +212,7 @@ fun CharacterDetailsScreen(
                             fontWeight = FontWeight.Bold
                         )
                         Text(text = "Gender")
-
-
                     }
-
                 }
 
                 Row(
@@ -207,23 +231,21 @@ fun CharacterDetailsScreen(
                             fontWeight = FontWeight.Bold
                         )
                         Text(text = "Location", style = MaterialTheme.typography.subtitle2)
-
                     }
                     IconButton(onClick = { }) {
                         Icon(
                             imageVector = Icons.Default.ArrowForward,
                             contentDescription = "view locations"
                         )
-
                     }
                 }
-
 
                 Card(elevation = 8.dp) {
 
                     LazyColumn(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        state = lazyListState
                     ) {
                         item {
                             Row(
@@ -234,7 +256,7 @@ fun CharacterDetailsScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = "Episodes Appeared In",
+                                    text = "Episodes Appeared In (${episodesList.episodesDataList.size})",
                                     fontSize = 16.sp,
                                     fontWeight = FontWeight.ExtraBold
                                 )
@@ -243,18 +265,16 @@ fun CharacterDetailsScreen(
                                     navigateToAllEpisodes()
                                 }) {
                                     Text(text = "View All Episodes", fontSize = 13.sp)
-
                                 }
-
                             }
                         }
-
 
                         items(episodesList.episodesDataList) { episode ->
                             Card(
                                 onClick = {
                                     navigateToSpecificEpisode(episode.id)
-                                }, modifier = Modifier
+                                },
+                                modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(horizontal = 8.dp, vertical = 4.dp)
                             ) {
@@ -265,7 +285,7 @@ fun CharacterDetailsScreen(
                                         .padding(horizontal = 8.dp, vertical = 4.dp)
                                 ) {
 
-                                    Image(
+                                    Icon(
                                         imageVector = Icons.Default.Face,
                                         contentDescription = null,
                                         modifier = Modifier.size(32.dp)
@@ -274,17 +294,11 @@ fun CharacterDetailsScreen(
                                     Column {
                                         Text(text = episode.episode)
                                         Text(text = episode.name, fontWeight = FontWeight.Bold)
-
                                     }
-
                                 }
-
                             }
-
-
                         }
                         if (episodesList.isLoading) {
-
 
                             item {
                                 CircularProgressIndicator(
@@ -293,18 +307,11 @@ fun CharacterDetailsScreen(
                             }
                         }
 
-
-
                         item {
                             Text(text = episodesList.errorMessage, color = Color.Red)
-
                         }
-
-
                     }
                 }
-
-
             }
 
             Surface(
@@ -324,7 +331,6 @@ fun CharacterDetailsScreen(
     }
 }
 
-
 @Preview(showSystemUi = true)
 @Composable
 fun CharacterMeta(
@@ -335,7 +341,6 @@ fun CharacterMeta(
     var a by remember {
         mutableStateOf(1)
     }
-
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -356,17 +361,11 @@ fun CharacterMeta(
         Button(onClick = { a++ }) {
             Text("Click To Add")
         }
-
-
-
     }
-
-
 }
 
 @Composable
 fun CustomText(text: String) {
-
 
     Text(
         text,

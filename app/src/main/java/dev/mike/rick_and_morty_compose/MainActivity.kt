@@ -21,8 +21,10 @@ import dev.mike.rick_and_morty_compose.components.AppContent
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @ExperimentalMaterialApi
-    @ExperimentalAnimationApi
+
+    @OptIn(ExperimentalMaterialApi::class,
+        androidx.compose.animation.ExperimentalAnimationApi::class
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
