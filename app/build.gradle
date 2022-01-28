@@ -78,5 +78,8 @@ dependencies {
     implementation "com.google.accompanist:accompanist-navigation-animation:$navigation_animation"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 
+    //splash screen
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+
 
 }
