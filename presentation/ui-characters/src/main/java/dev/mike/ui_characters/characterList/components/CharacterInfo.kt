@@ -8,20 +8,20 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.palette.graphics.Palette
 import coil.request.ImageRequest
+import coil.transform.BlurTransformation
 import com.skydoves.landscapist.CircularReveal
 import com.skydoves.landscapist.coil.CoilImage
 import com.skydoves.landscapist.palette.BitmapPalette
@@ -66,10 +66,12 @@ fun ImageCard(imageLink: String, modifier: Modifier, bitPallette: (Palette) -> U
             .Builder(LocalContext.current)
             .data(imageLink)
             .crossfade(true)
+
             .build(),
         alignment = Alignment.Center,
         loading = {
-            ConstraintLayout(
+            Text(text = "Loading...")
+           /* ConstraintLayout(
                 modifier = Modifier.fillMaxSize()
             ) {
                 val indicator = createRef()
@@ -81,7 +83,7 @@ fun ImageCard(imageLink: String, modifier: Modifier, bitPallette: (Palette) -> U
                         end.linkTo(parent.end)
                     }
                 )
-            }
+            }*/
         },
         circularReveal = CircularReveal(
             duration = 300,
