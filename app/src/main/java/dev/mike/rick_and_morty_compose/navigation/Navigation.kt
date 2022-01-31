@@ -1,6 +1,7 @@
 package dev.mike.rick_and_morty_compose.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -10,7 +11,10 @@ import dev.mike.common.Characters
 import dev.mike.common.Episodes
 import dev.mike.common.Locations
 import dev.mike.ui_characters.navigation.charactersGraph
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@OptIn(ExperimentalCoroutinesApi::class)
+@ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @Composable
 fun MainNavigation(navhostController: NavHostController) {

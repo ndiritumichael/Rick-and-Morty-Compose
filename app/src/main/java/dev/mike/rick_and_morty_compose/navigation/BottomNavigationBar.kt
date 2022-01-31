@@ -2,9 +2,9 @@ package dev.mike.rick_and_morty_compose.navigation
 
 import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.* // ktlint-disable no-wildcard-imports
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,22 +24,23 @@ fun BottomNavigationBar(navHostController: NavHostController) {
         NavigationItem.EpisodesScreen,
     )
 
-
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .alpha(0.85F),
-        elevation = 16.dp,
-        shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
+            .alpha(0.95F)
+            .padding(horizontal = 8.dp),
+
     ) {
 
-        BottomNavigation( backgroundColor = MaterialTheme.colors.onPrimary) {
+        BottomNavigation(backgroundColor = MaterialTheme.colors.surface) {
             bottomScreens.map {
                 val isSelected = navHostController
                     .currentBackStackEntryAsState().value?.destination?.route == it.route
-                Log.d("bottomnav","${navHostController
-                    .currentBackStackEntryAsState().value?.destination?.route}")
+                Log.d(
+                    "bottomnav",
+                    "${navHostController
+                        .currentBackStackEntryAsState().value?.destination?.route}"
+                )
 
                 BottomNavigationItem(
                     selected = isSelected,
@@ -58,9 +59,9 @@ fun BottomNavigationBar(navHostController: NavHostController) {
                         Icon(painter = painterResource(id = it.icon), contentDescription = "bottom Bar Icon", modifier = Modifier.size(24.dp))
                     },
                     label = {
-                        Text(text = it.title, color = MaterialTheme.colors.primary)
+                        Text(text = it.title,)
                     },
-                    alwaysShowLabel = isSelected,
+
                     unselectedContentColor = Color.LightGray,
                     selectedContentColor = MaterialTheme.colors.primary
                 )
