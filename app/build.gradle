@@ -10,7 +10,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "dev.mike.rick_and_morty_compose"
+        applicationId "dev.mike.rickmortycompose"
         minSdk 21
         targetSdk 31
         versionCode 1
@@ -26,6 +26,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug{
+
+            applicationIdSuffix ".debug"
         }
     }
     compileOptions {
