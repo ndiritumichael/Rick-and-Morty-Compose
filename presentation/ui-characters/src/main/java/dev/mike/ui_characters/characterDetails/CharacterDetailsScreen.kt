@@ -31,8 +31,8 @@ import androidx.palette.graphics.Palette
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.mike.commons.components.MediumSpacer
 import dev.mike.ui_characters.characterList.components.ImageCard
-import kotlin.math.min
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlin.math.min
 
 @ExperimentalMaterialApi
 @ExperimentalCoroutinesApi
@@ -46,7 +46,7 @@ fun CharacterDetailsScreen(
     viewModel: CharacterDetailsViewModel = hiltViewModel(),
 
 ) {
-    val systeminDarkMode = isSystemInDarkTheme()
+    val systemInDarkMode = isSystemInDarkTheme()
     val lazyListState = rememberLazyListState()
     val scrollOffset = min(
         1f.coerceAtMost(1f),
@@ -57,15 +57,12 @@ fun CharacterDetailsScreen(
 
     val imageSize by animateFloatAsState(
         targetValue = 0.4f * scrollOffset,
-        animationSpec =   tween(
+        animationSpec = tween(
             durationMillis = 300,
             delayMillis = 50,
             easing = FastOutSlowInEasing
         )
-        /*spring(
-            dampingRatio = Spring.DampingRatioHighBouncy,
-            stiffness = Spring.StiffnessMedium
-        ) */// tween(easing = FastOutLinearInEasing)
+
     )
     val systemUiController = rememberSystemUiController()
 
@@ -73,12 +70,12 @@ fun CharacterDetailsScreen(
         mutableStateOf<Palette?>(null)
     }
 
-    val vibrantColor = when (systeminDarkMode) {
+    val vibrantColor = when (systemInDarkMode) {
 
         true -> colorPalette?.darkVibrantSwatch?.rgb
         false -> colorPalette?.lightVibrantSwatch?.rgb
     } ?: 0
-    val mutedColor = when (systeminDarkMode) {
+    val mutedColor = when (systemInDarkMode) {
 
         true -> colorPalette?.darkMutedSwatch?.rgb
         false -> colorPalette?.lightMutedSwatch?.rgb
@@ -99,7 +96,7 @@ fun CharacterDetailsScreen(
 
         systemUiController.setStatusBarColor(
             color = if (imageSize == 0f) Color.Transparent else Color(vibrantColor),
-            darkIcons = systeminDarkMode.not()
+            darkIcons = systemInDarkMode.not()
         )
     }
 
@@ -129,7 +126,7 @@ fun CharacterDetailsScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp),
 
             ) {
                 Box(
@@ -155,7 +152,6 @@ fun CharacterDetailsScreen(
 
                                 alpha = min(1f, 1 - (scrollOffset / 600f))
                                 translationY = -scrollOffset * 0.1f
-
                             }
                     ) { palette ->
                         colorPalette = palette
@@ -240,10 +236,15 @@ fun CharacterDetailsScreen(
                     }
                 }
 
-                Card(elevation = 8.dp) {
+                Card(
+                    elevation = 8.dp,
+                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                   // backgroundColor = Color(mutedColor).copy(0.5f)
+                ) {
 
                     LazyColumn(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().background(Color.Transparent),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         state = lazyListState
                     ) {
@@ -270,33 +271,34 @@ fun CharacterDetailsScreen(
                         }
 
                         items(episodesList.episodesDataList) { episode ->
-                            Card(
+                           /* Card(
                                 onClick = {
                                     navigateToSpecificEpisode(episode.id)
                                 },
                                 modifier = Modifier
                                     .fillMaxWidth()
+                                    .padding(horizontal = 8.dp, vertical = 4.dp),
+
+                            ) {*/
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()
                                     .padding(horizontal = 8.dp, vertical = 4.dp)
                             ) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                                ) {
 
-                                    Icon(
-                                        imageVector = Icons.Default.Face,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(32.dp)
-                                    )
-                                    MediumSpacer()
-                                    Column {
-                                        Text(text = episode.episode)
-                                        Text(text = episode.name, fontWeight = FontWeight.Bold)
-                                    }
+                                Icon(
+                                    imageVector = Icons.Default.Face,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(32.dp)
+                                )
+                                MediumSpacer()
+                                Column {
+                                    Text(text = episode.episode)
+                                    Text(text = episode.name, fontWeight = FontWeight.Bold)
                                 }
                             }
+                            // }
                         }
                         if (episodesList.isLoading) {
 
@@ -313,19 +315,20 @@ fun CharacterDetailsScreen(
                     }
                 }
             }
-
-            Surface(
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(8.dp),
-                shape = CircleShape
-            ) {
-                IconButton(onClick = navigate, modifier = Modifier.padding(4.dp)) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "navigate back"
-                    )
-                }
+        }
+    }
+    Box(modifier = Modifier.fillMaxWidth()) {
+        Surface(
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(8.dp),
+            shape = CircleShape
+        ) {
+            IconButton(onClick = navigate, modifier = Modifier.padding(4.dp)) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "navigate back"
+                )
             }
         }
     }
