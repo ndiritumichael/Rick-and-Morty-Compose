@@ -81,7 +81,7 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
 
-    implementation "com.google.accompanist:accompanist-navigation-animation:$navigation_animation"
+    implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 
     //splash screen
