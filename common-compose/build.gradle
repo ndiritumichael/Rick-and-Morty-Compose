@@ -60,7 +60,7 @@ dependencies {
     api "com.google.accompanist:accompanist-systemuicontroller:$accompanist"
 
     //  use accompanist-placeholder-material
-    implementation "com.google.accompanist:accompanist-placeholder-material:$accompanist"
+    api "com.google.accompanist:accompanist-placeholder-material:$accompanist"
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 }

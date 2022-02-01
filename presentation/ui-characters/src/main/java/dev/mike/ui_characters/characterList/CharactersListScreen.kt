@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.max
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dev.mike.commons.components.MediumSpacer
 import dev.mike.commons.utils.CustomToolBar
 import dev.mike.ui_characters.characterList.CharactersListViewModel
 import dev.mike.ui_characters.characterList.components.CharactersListColumn
@@ -81,10 +83,16 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                             .weight(9f)
                             .padding(end = 16.dp)
                     ) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = null
+                        )
+                        MediumSpacer()
                         Text(
                             text = "Search Characters",
+                            fontStyle = FontStyle.Italic,
 
-                            textAlign = TextAlign.Center,
+                            textAlign = TextAlign.Start,
                             style = MaterialTheme.typography.h6
                         )
                     }
