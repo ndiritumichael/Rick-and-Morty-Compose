@@ -34,6 +34,7 @@ fun CharacterUI(character: Character, onClick: (Int) -> Unit) {
             modifier = Modifier
                 .animateContentSize()
                 .padding(8.dp)
+                .height(150.dp)
                 .clickable {
                     onClick(character.id)
                 }
