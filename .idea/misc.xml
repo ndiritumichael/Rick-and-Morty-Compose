@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1595" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1595" />
         <entry key="app/src/release/res/drawable/res.xml" value="0.1595" />
+        <entry key="common-compose/src/main/res/drawable/logo.xml" value="0.1595" />
       </map>
     </option>
   </component>
