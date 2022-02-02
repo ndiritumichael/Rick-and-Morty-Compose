@@ -10,6 +10,7 @@ import com.google.accompanist.navigation.animation.composable
 import dev.mike.common.Characters
 import dev.mike.common.Episodes
 import dev.mike.common.Locations
+import dev.mike.commons.components.ComingSoonBox
 import dev.mike.ui_characters.navigation.charactersGraph
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -25,13 +26,18 @@ fun MainNavigation(navhostController: NavHostController) {
         composable(
             route = Episodes.EPISODESGRAPH
         ) {
-            Text(text = "episode")
+
+            ComingSoonBox{
+                navhostController.navigateUp()
+            }
         }
 
         composable(
             route = Locations.LOCATIONSGRAPH
         ) {
-            Text(text = "location")
+            ComingSoonBox{
+                navhostController.navigateUp()
+            }
         }
     }
 }

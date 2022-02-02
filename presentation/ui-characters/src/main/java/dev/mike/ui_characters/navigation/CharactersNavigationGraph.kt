@@ -3,6 +3,7 @@ package dev.mike.ui_characters.navigation
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.ui.Alignment
 import androidx.navigation.*
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
@@ -31,9 +32,10 @@ fun NavGraphBuilder.charactersGraph(
                 slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700))
             },
             exitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
-                             scaleOut(targetScale = 1F)
+                           //  scaleOut(targetScale = 1F)
+                shrinkVertically(shrinkTowards = Alignment.Top)
 
-               // slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = tween(700))
+            //slideOutHorizontally(targetOffsetX = { -3000 }, animationSpec = tween(700))
             },
             popEnterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
