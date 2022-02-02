@@ -119,10 +119,10 @@ fun CharactersListColumn(
                 }
             }
         }
-
+/*  WARNING adding this to a  lazy column makes iit lose state
         item {
             Box(modifier = Modifier.height(60.dp)
                 .padding(56.dp))
-        }
+        }*/
     }
 }
