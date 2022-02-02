@@ -14,3 +14,5 @@ include ':data:repository'
 include ':domain'
 include ':presentation:ui-characters'
 include ':common-compose'
+
+include ':presentation:ui-locations'
