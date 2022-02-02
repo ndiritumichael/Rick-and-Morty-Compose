@@ -4,7 +4,6 @@ import android.widget.Toast
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
@@ -15,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -24,9 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.mike.commons.components.MediumSpacer
 import dev.mike.commons.utils.CustomToolBar
+import dev.mike.commons.utils.ResetSystemBars
 import dev.mike.ui_characters.characterList.CharactersListViewModel
 import dev.mike.ui_characters.characterList.components.CharactersListColumn
 import kotlin.math.min
@@ -34,9 +32,8 @@ import kotlin.math.min
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
-    val uiController = rememberSystemUiController()
+    //ResetSystemBars()
 
-    uiController.setStatusBarColor(color = Color.Transparent, darkIcons = !isSystemInDarkTheme())
     val context = LocalContext.current
 
     val viewModel: CharactersListViewModel = hiltViewModel()

@@ -121,7 +121,8 @@ fun CharactersListColumn(
         }
 
         item {
-            Box(modifier = Modifier.height(60.dp))
+            Box(modifier = Modifier.height(60.dp)
+                .padding(56.dp))
         }
     }
 }

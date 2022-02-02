@@ -7,6 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import dev.mike.commons.components.CustomSearchBar
+import dev.mike.commons.utils.ResetSystemBars
 import dev.mike.ui_characters.characterList.components.CharactersListColumn
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -23,11 +24,12 @@ fun CharactersSearch(
 
     val searchString = viewModel.searchString.collectAsState().value
     LaunchedEffect(key1 = searchString) {
-        if (searchString != "" ) {
+        if (searchString != "") {
 
-            viewModel.searchCharacterbyName(searchString)}
-
+            viewModel.searchCharacterbyName(searchString)
+        }
     }
+    ResetSystemBars()
     Scaffold(
         topBar =
         {
@@ -42,7 +44,7 @@ fun CharactersSearch(
     ) {
 
         characters?.let { searchCharacters ->
-            CharactersListColumn(items = searchCharacters){id->
+            CharactersListColumn(items = searchCharacters) { id ->
                 navigate(id)
             }
         }
