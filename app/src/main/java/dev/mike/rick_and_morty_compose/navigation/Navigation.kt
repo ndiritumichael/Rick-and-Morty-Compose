@@ -2,9 +2,9 @@ package dev.mike.rick_and_morty_compose.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import com.devmike.ui_episodes.navigation.episodesGraph
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import dev.mike.common.Characters
@@ -23,19 +23,13 @@ fun MainNavigation(navhostController: NavHostController) {
     AnimatedNavHost(navController = navhostController, startDestination = Characters.CHARACTERSGRAPH) {
 
         charactersGraph(navhostController)
-        composable(
-            route = Episodes.EPISODESGRAPH
-        ) {
+        episodesGraph(navhostController)
 
-            ComingSoonBox{
-                navhostController.navigateUp()
-            }
-        }
 
         composable(
             route = Locations.LOCATIONSGRAPH
         ) {
-            ComingSoonBox{
+            ComingSoonBox {
                 navhostController.navigateUp()
             }
         }
