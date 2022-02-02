@@ -28,7 +28,8 @@ fun BottomNavigationBar(navHostController: NavHostController) {
         modifier = Modifier
             .fillMaxWidth()
             .alpha(0.95F)
-            .padding(horizontal = 8.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        elevation = 8.dp
 
     ) {
 
@@ -62,7 +63,7 @@ fun BottomNavigationBar(navHostController: NavHostController) {
                         Text(text = it.title,)
                     },
 
-                    unselectedContentColor = Color.LightGray,
+                    unselectedContentColor = Color.Gray,
                     selectedContentColor = MaterialTheme.colors.primary
                 )
             }

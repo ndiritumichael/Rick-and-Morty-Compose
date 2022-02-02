@@ -9,6 +9,6 @@ import dev.mike.rick_and_morty_compose.R
 sealed class NavigationItem(var route: String, var title: String, @DrawableRes var icon: Int) {
 
     object CharactersScreen : NavigationItem(Characters.CHARACTERlIST, "Characters", R.drawable.ic_baseline_face_24)
-    object LocationsScreen : NavigationItem(Locations.LOCATIONSGRAPH, "Locations", R.drawable.ic_baseline_add_location_24)
-    object EpisodesScreen : NavigationItem(Episodes.EPISODESGRAPH, "Episodes", R.drawable.ic_baseline_slideshow_24)
+    object LocationsScreen : NavigationItem(Locations.LOCATIONlIST, "Locations", R.drawable.ic_baseline_add_location_24)
+    object EpisodesScreen : NavigationItem(Episodes.EPISODELIST, "Episodes", R.drawable.ic_baseline_slideshow_24)
 }

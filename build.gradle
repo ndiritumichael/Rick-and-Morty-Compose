@@ -12,7 +12,7 @@ buildscript {
         paging_compose = "1.0.0-alpha14"
         navigation_animation = "0.21.3-beta"
         landscapist_coil="1.4.4"
-        accompanist = "0.22.0-rc"
+        accompanist = "0.24.1-alpha"
 
     }
     repositories {

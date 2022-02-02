@@ -103,18 +103,19 @@ fun CharacterDetailsScreen(
     val detailsState = viewModel.detailsState.value
 
     detailsState.errorMessage?.let { Text(text = it) }
+
     if (detailsState.isLoading) {
 
         Box(
             modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    color = Color.Gray
-                ),
+                .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
 
-            CircularProgressIndicator(modifier = Modifier.size(30.dp))
+            Card(shape = CircleShape) {
+
+                CircularProgressIndicator(modifier = Modifier.size(60.dp).padding(16.dp))
+            }
         }
     }
     Box(
@@ -240,11 +241,13 @@ fun CharacterDetailsScreen(
                     elevation = 8.dp,
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier.padding(horizontal = 16.dp)
-                   // backgroundColor = Color(mutedColor).copy(0.5f)
+                    // backgroundColor = Color(mutedColor).copy(0.5f)
                 ) {
 
                     LazyColumn(
-                        modifier = Modifier.fillMaxWidth().background(Color.Transparent),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color.Transparent),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         state = lazyListState
                     ) {

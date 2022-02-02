@@ -1,12 +1,10 @@
 package dev.mike.ui_characters
 
+import android.widget.Toast
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -16,23 +14,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dev.mike.commons.components.MediumSpacer
 import dev.mike.commons.utils.CustomToolBar
+import dev.mike.commons.utils.ResetSystemBars
 import dev.mike.ui_characters.characterList.CharactersListViewModel
 import dev.mike.ui_characters.characterList.components.CharactersListColumn
 import kotlin.math.min
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
-    val uiController = rememberSystemUiController()
+    //ResetSystemBars()
 
-    uiController.setStatusBarColor(color = Color.Transparent, darkIcons = !isSystemInDarkTheme())
+    val context = LocalContext.current
 
     val viewModel: CharactersListViewModel = hiltViewModel()
     val state = viewModel.characterListState.value
@@ -49,27 +51,69 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
         animationSpec = tween(easing = FastOutLinearInEasing)
     )
 
-
     val characters = state.dataList?.collectAsLazyPagingItems()
     Scaffold(
         topBar = {
             if (toolBarHeight > 56.dp) {
-                CustomToolBar(modifier = Modifier.height(toolBarHeight),TitleText = {
-                    Text(fontWeight = FontWeight.SemiBold,
-                        style = MaterialTheme.typography.h3,
+                CustomToolBar(
 
-                        text = "Characters",
+                    modifier = Modifier.height(toolBarHeight),
+                    TitleText = {
+                        Text(
+                            fontWeight = FontWeight.SemiBold,
+                            style = MaterialTheme.typography.h3,
+
+                            text = "Characters",
+                            modifier = Modifier
+                                .align(
+                                    alignment = Alignment.TopStart
+                                )
+                        )
+                    }
+                ) {
+
+                    TextButton(
+                        onClick = searchScreen,
+                        colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colors.onSurface),
                         modifier = Modifier
-                            .align(alignment = Alignment.TopStart
-                            )
-                    )
-                }, icon1 = {  IconButton(onClick = { searchScreen() }) {
-                    Icon(imageVector = Icons.Default.Search, contentDescription = null)
-                } }) {
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = "settings"
-                    )
+                            .fillMaxWidth()
+                            .weight(9f)
+                            .padding(end = 16.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = null
+                        )
+                        MediumSpacer()
+                        Text(
+                            text = "Search Characters",
+                            fontStyle = FontStyle.Italic,
+
+                            textAlign = TextAlign.Start,
+                            style = MaterialTheme.typography.h6
+                        )
+                    }
+
+/* IconButton(
+                        modifier = Modifier
+                            .weight(9f)
+                            ,
+                        onClick = { searchScreen() }
+                    ) {
+                        Icon(imageVector = Icons.Default.Search, contentDescription = null)
+                    }*/
+
+                    IconButton(
+                        onClick = {
+                            Toast.makeText(context, "Settings Screen Clicked", Toast.LENGTH_LONG).show()
+                        }
+
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = "settings"
+                        )
+                    }
                 }
             } else {
 
@@ -79,7 +123,10 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                     backgroundColor = MaterialTheme.colors.onPrimary,
                     actions = {
 
-                        IconButton(onClick = { searchScreen() }) {
+                        IconButton(
+
+                            onClick = { searchScreen() }
+                        ) {
                             Icon(imageVector = Icons.Default.Search, contentDescription = null)
                         }
                         IconButton(onClick = {}) {

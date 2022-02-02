@@ -10,7 +10,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "dev.mike.rick_and_morty_compose"
+        applicationId "dev.mike.rickmortycompose"
         minSdk 21
         targetSdk 31
         versionCode 1
@@ -26,6 +26,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug{
+
+            applicationIdSuffix ".debug"
         }
     }
     compileOptions {
@@ -57,6 +62,8 @@ dependencies {
     implementation(project(":common"))
     api(project(":common-compose"))
     implementation(project(":presentation:ui-characters"))
+    implementation(project(":presentation:ui-episodes"))
+    implementation(project(":presentation:ui-locations"))
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -76,7 +83,7 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
 
-    implementation "com.google.accompanist:accompanist-navigation-animation:$navigation_animation"
+    implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 
     //splash screen
