@@ -161,6 +161,10 @@ These are the app's screenshots and video:
 
 
 
-https://user-images.githubusercontent.com/17760799/151126522-ac5dcbb8-1575-4b90-89e7-42659c1a51a4.mp4
+
+
+https://user-images.githubusercontent.com/17760799/152233385-3e76f6a4-6a96-429c-acb7-2eb7cd842bae.mp4
+
+
 
 
