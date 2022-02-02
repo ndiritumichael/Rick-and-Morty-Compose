@@ -27,7 +27,7 @@ fun NavGraphBuilder.charactersGraph(
 
         composable(
             route = Characters.CHARACTERlIST,
-       /*     enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
+            enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
                 slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700))
             },
@@ -46,7 +46,7 @@ fun NavGraphBuilder.charactersGraph(
             popExitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
                 slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = tween(700))
-            }*/
+            }
 
         ) {
 
@@ -61,7 +61,7 @@ fun NavGraphBuilder.charactersGraph(
         }
 
         composable(
-          /*  enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
+            enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
                 scaleIn()
 
@@ -80,7 +80,7 @@ fun NavGraphBuilder.charactersGraph(
             popExitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
                 slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = tween(700))
-            },*/
+            },
             route = Characters.CHARACTERDETAILS + "/{characterId}",
             arguments = listOf(
                 navArgument(
@@ -97,7 +97,7 @@ fun NavGraphBuilder.charactersGraph(
                     navigateToAllEpisodes = {
                         navHostController.navigate(Episodes.EPISODESGRAPH) {
 
-                           // popUpTo(route = Characters.CHARACTERlIST) { saveState = true }
+                            // popUpTo(route = Characters.CHARACTERlIST) { saveState = true }
                         }
                     },
                     navigateToSpecificEpisode = {
@@ -109,14 +109,14 @@ fun NavGraphBuilder.charactersGraph(
         }
 
         composable(
-           /* enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
+            enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
                 slideInVertically(initialOffsetY = { +3000 }, animationSpec = tween(700))
             },
             popExitTransition = {
                 scaleOut()
                 //  slideOutVertically(targetOffsetY = { +3000 }, animationSpec = tween(700))
-            },*/
+            },
 
             route = Characters.CHARACTERSEARCH
         ) {
