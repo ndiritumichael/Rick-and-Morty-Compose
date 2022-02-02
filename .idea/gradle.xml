@@ -19,6 +19,8 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/presentation" />
             <option value="$PROJECT_DIR$/presentation/ui-characters" />
+            <option value="$PROJECT_DIR$/presentation/ui-episodes" />
+            <option value="$PROJECT_DIR$/presentation/ui-locations" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
