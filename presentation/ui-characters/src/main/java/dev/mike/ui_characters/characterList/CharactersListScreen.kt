@@ -32,7 +32,7 @@ import kotlin.math.min
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
-    //ResetSystemBars()
+    ResetSystemBars()
 
     val context = LocalContext.current
 

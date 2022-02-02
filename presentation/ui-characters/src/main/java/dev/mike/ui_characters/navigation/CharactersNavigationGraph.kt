@@ -95,9 +95,10 @@ fun NavGraphBuilder.charactersGraph(
 
                 CharacterDetailsScreen(
                     navigateToAllEpisodes = {
-                        navHostController.navigate(Episodes.EPISODESGRAPH) {
 
-                            // popUpTo(route = Characters.CHARACTERlIST) { saveState = true }
+                        navHostController.navigate(Episodes.EPISODELIST) {
+
+                            popUpTo(route = Characters.CHARACTERDETAILS) { saveState = true }
                         }
                     },
                     navigateToSpecificEpisode = {
