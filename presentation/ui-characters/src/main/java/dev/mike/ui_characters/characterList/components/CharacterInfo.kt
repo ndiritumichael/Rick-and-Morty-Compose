@@ -2,8 +2,9 @@ package dev.mike.ui_characters.characterList.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -31,13 +32,16 @@ import com.skydoves.landscapist.coil.CoilImage
 import com.skydoves.landscapist.palette.BitmapPalette
 import dev.mike.commons.components.MediumSpacer
 import dev.mike.domain.model.Character
-import kotlinx.coroutines.delay
 
 @Composable
 fun CharacterUI(character: Character, onClick: (Int) -> Unit) {
 
+    AnimatedVisibility(
 
-    AnimatedVisibility(visible = true) {
+        visible = true,
+        enter = fadeIn(),
+        exit = fadeOut()
+    ) {
         Card(
             modifier = Modifier
                 .animateContentSize()
@@ -61,7 +65,6 @@ fun CharacterUI(character: Character, onClick: (Int) -> Unit) {
                         .fillMaxSize()
                         .padding(4.dp)
                 )
-
             }
         }
     }
