@@ -18,7 +18,7 @@ import dev.mike.commons.R
 
 @Composable
 @Preview(showSystemUi = true)
-fun ComingSoonBox(clicked: () -> Unit = {}) {
+fun ComingSoonBox(text: String = "", clicked: () -> Unit = {}) {
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 
@@ -27,12 +27,12 @@ fun ComingSoonBox(clicked: () -> Unit = {}) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            Text(text = "Coming Soon!!", style = MaterialTheme.typography.h3)
+            Text(text = "$text is Coming Soon!!", style = MaterialTheme.typography.h4)
             Image(
                 painter = painterResource(id = R.drawable.showlogo),
                 contentDescription = null
             )
-            Text(text = "Work In Progress", style = MaterialTheme.typography.body1)
+            Text(text = "Work In Progress", style = MaterialTheme.typography.h5)
 
             Button(onClick = clicked) {
                 Text(text = "Go Back")
