@@ -5,6 +5,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.devmike.ui_episodes.navigation.episodesGraph
+import com.devmike.ui_locations.locationsGraph
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import dev.mike.common.Characters
@@ -23,15 +24,8 @@ fun MainNavigation(navhostController: NavHostController) {
     AnimatedNavHost(navController = navhostController, startDestination = Characters.CHARACTERSGRAPH) {
 
         charactersGraph(navhostController)
-        episodesGraph(navhostController)
+  episodesGraph(navhostController)
+        locationsGraph(navhostController)
 
-
-        composable(
-            route = Locations.LOCATIONSGRAPH
-        ) {
-            ComingSoonBox {
-                navhostController.navigateUp()
-            }
-        }
     }
 }
