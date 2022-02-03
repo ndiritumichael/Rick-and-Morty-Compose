@@ -6,6 +6,8 @@ An android app built using Kotlin that consumes [Rick and Morty API](https://ric
 
 ## Table Of Content.
 
+
+- [Demo](#demo)
 - [Prerequisite](#prerequisite)
     - [Disclaimer](##disclaimer)
 - [Architecture](#architecture)
@@ -19,7 +21,23 @@ An android app built using Kotlin that consumes [Rick and Morty API](https://ric
     - [Libraries](##libraries)
     - [Extras](##extras)
 - [Helpful Resources](#helpful-resources)
-- [Demo](#demo)
+
+
+
+## Demo
+These are the app's screenshots and video:
+
+
+<img src="assets/characters_light.jpg" width="250"/> <img src="assets/characters_dark.jpg" width="250"/> 
+
+<img src="assets/details_light.jpg" width="250"/> <img src="assets/details_dark.jpg" width="250"/> 
+
+
+
+
+
+
+https://user-images.githubusercontent.com/17760799/152233385-3e76f6a4-6a96-429c-acb7-2eb7cd842bae.mp4
 
 ## Prerequisite.
 
@@ -150,20 +168,6 @@ In this section i've included some resources ie. articles and GitHub repositorie
 
 
 
-## Demo
-These are the app's screenshots and video:
-
-
-<img src="assets/characters_light.jpg" width="250"/> <img src="assets/characters_dark.jpg" width="250"/> 
-
-<img src="assets/details_light.jpg" width="250"/> <img src="assets/details_dark.jpg" width="250"/> 
-
-
-
-
-
-
-https://user-images.githubusercontent.com/17760799/152233385-3e76f6a4-6a96-429c-acb7-2eb7cd842bae.mp4
 
 
 
