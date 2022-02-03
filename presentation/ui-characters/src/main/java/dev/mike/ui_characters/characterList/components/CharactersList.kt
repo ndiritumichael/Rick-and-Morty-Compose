@@ -23,9 +23,11 @@ fun CharactersListColumn(
     listState: LazyListState = rememberLazyListState(),
     navigate: (Int) -> Unit = {}
 ) {
-    LazyColumn(state = listState,
+    LazyColumn(
+        state = listState,
         modifier = Modifier
-        .animateContentSize()) {
+            .animateContentSize()
+    ) {
 
         items(items) { character ->
             CharacterUI(character = character!!) { id ->
@@ -58,7 +60,8 @@ fun CharactersListColumn(
 
                     item {
                         Box(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier =  Modifier.fillMaxWidth()
+                                .padding(bottom = 56.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             CircularProgressIndicator(modifier = Modifier.height(30.dp))
@@ -70,7 +73,8 @@ fun CharactersListColumn(
                     val errorMessage = items.loadState.refresh as LoadState.Error
                     item {
                         Box(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(bottom = 56.dp),
                             contentAlignment = Alignment.BottomCenter
                         ) {
                             Column(
@@ -97,7 +101,8 @@ fun CharactersListColumn(
 
                     item {
                         Box(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(bottom = 56.dp),
                             contentAlignment = Alignment.BottomCenter
                         ) {
                             Column(
@@ -114,5 +119,10 @@ fun CharactersListColumn(
                 }
             }
         }
+/*  WARNING adding this to a  lazy column makes iit lose state
+        item {
+            Box(modifier = Modifier.height(60.dp)
+                .padding(56.dp))
+        }*/
     }
 }

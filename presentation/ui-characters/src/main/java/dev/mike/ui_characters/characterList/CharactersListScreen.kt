@@ -4,18 +4,18 @@ import android.widget.Toast
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -24,24 +24,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.mike.commons.components.MediumSpacer
 import dev.mike.commons.utils.CustomToolBar
+import dev.mike.commons.utils.ResetSystemBars
 import dev.mike.ui_characters.characterList.CharactersListViewModel
 import dev.mike.ui_characters.characterList.components.CharactersListColumn
+import kotlinx.coroutines.launch
 import kotlin.math.min
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
-    val uiController = rememberSystemUiController()
+    ResetSystemBars()
 
-    uiController.setStatusBarColor(color = Color.Transparent, darkIcons = !isSystemInDarkTheme())
     val context = LocalContext.current
 
     val viewModel: CharactersListViewModel = hiltViewModel()
     val state = viewModel.characterListState.value
     val lazyListState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
     val scrollOffset = min(
         1f.coerceAtMost(1f),
         (1 - (lazyListState.firstVisibleItemScrollOffset / 2000f + lazyListState.firstVisibleItemIndex)).coerceAtLeast(
@@ -140,6 +141,20 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                         }
                     }
                 )
+            }
+        },
+        floatingActionButtonPosition = FabPosition.End,
+        floatingActionButton = {
+            if (scrollOffset == 0f) {
+                FloatingActionButton(
+                    onClick = { scope.launch { lazyListState.animateScrollToItem(0) } },
+                    modifier = Modifier.padding(bottom = 70.dp)
+                ) {
+                    Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
+                }
+                /* IconButton(onClick = { scope.launch { lazyListState.animateScrollToItem(1) } }) {
+                Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
+            }*/
             }
         }
     ) {

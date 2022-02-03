@@ -1,10 +1,9 @@
 package dev.mike.ui_characters.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.ui.Alignment
 import androidx.navigation.*
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
@@ -33,12 +32,16 @@ fun NavGraphBuilder.charactersGraph(
                 slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700))
             },
             exitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
+                //  scaleOut(targetScale = 1F)
+                shrinkVertically(shrinkTowards = Alignment.Top)
 
-                slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = tween(700))
+                // slideOutHorizontally(targetOffsetX = { -3000 }, animationSpec = tween(700))
             },
             popEnterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
-                slideInHorizontally(initialOffsetX = { -1000 }, animationSpec = tween(700))
+                slideInVertically(initialOffsetY = { 5000 }, animationSpec = tween(700))
+
+                // slideInHorizontally(initialOffsetX = { -1000 }, animationSpec = tween(700))
             },
             popExitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
@@ -51,18 +54,24 @@ fun NavGraphBuilder.charactersGraph(
                 navHostController.navigate(Characters.CHARACTERSEARCH)
             }) { characterId ->
                 navHostController.navigate(Characters.CHARACTERDETAILS + "/$characterId") {
+
                     launchSingleTop
                 }
             }
         }
 
-        composable(   enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
+        composable(
+            enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
-            slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700))
-        },
+                scaleIn()
+
+                // slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700))
+            },
             exitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
-                slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = tween(700))
+                scaleOut()
+
+                // slideOutVertically(targetOffsetY = { -1000 }, animationSpec = tween(700))
             },
             popEnterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
@@ -86,10 +95,13 @@ fun NavGraphBuilder.charactersGraph(
 
                 CharacterDetailsScreen(
                     navigateToAllEpisodes = {
-                                            navHostController.navigate(Episodes.EPISODESGRAPH)
+
+                        navHostController.navigate(Episodes.EPISODELIST) {
+
+                            popUpTo(route = Characters.CHARACTERDETAILS) { saveState = true }
+                        }
                     },
                     navigateToSpecificEpisode = {
-
                     },
 
                     { navHostController.popBackStack() }
@@ -97,16 +109,26 @@ fun NavGraphBuilder.charactersGraph(
             }
         }
 
-        composable(Characters.CHARACTERSEARCH) {
+        composable(
+            enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
+
+                slideInVertically(initialOffsetY = { +3000 }, animationSpec = tween(700))
+            },
+            popExitTransition = {
+                scaleOut()
+                //  slideOutVertically(targetOffsetY = { +3000 }, animationSpec = tween(700))
+            },
+
+            route = Characters.CHARACTERSEARCH
+        ) {
 
             CharactersSearch(navigate = {
-                    characterId ->
+                characterId ->
                 navHostController.navigate(Characters.CHARACTERDETAILS + "/$characterId") {
                     launchSingleTop
                 }
-
             }) {
-                navHostController.navigateUp()
+                navHostController.popBackStack()
             }
         }
     }

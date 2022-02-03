@@ -6,8 +6,10 @@
 
         // Use windowSplashScreenAnimatedIcon to add either a drawable or an
         // animated drawable. One of these is required.
+        <item name="icon">@drawable/splash</item>
+
         <item name ="windowSplashScreenAnimatedIcon" >@drawable/splash</item>
-        <item name="windowSplashScreenAnimationDuration" >1000</item>  # Required for
+        <item name="windowSplashScreenAnimationDuration" >1500</item>  # Required for
         # animated icons
 
 
