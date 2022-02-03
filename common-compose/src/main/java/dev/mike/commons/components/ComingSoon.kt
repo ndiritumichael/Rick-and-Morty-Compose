@@ -27,7 +27,7 @@ fun ComingSoonBox(text: String = "", clicked: () -> Unit = {}) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            Text(text = "$text is Coming Soon!!", style = MaterialTheme.typography.h4)
+            Text(text = "$text is Coming Soon!!", style = MaterialTheme.typography.h5)
             Image(
                 painter = painterResource(id = R.drawable.showlogo),
                 contentDescription = null
