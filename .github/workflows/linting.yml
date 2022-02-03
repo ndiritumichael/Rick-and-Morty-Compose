@@ -19,10 +19,11 @@ jobs:
         with:
           java-version: 11
           
-      - name: JDK version
-        run: ./gradlew --version
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
 
-      
+      - name: Build SampleApplication
+        run: ./gradlew --no-daemon build
 
       - name: Upload Build Lint Report
         uses: actions/upload-artifact@v2
