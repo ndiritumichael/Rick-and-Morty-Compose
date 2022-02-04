@@ -24,9 +24,7 @@ jobs: # groups the jobs to be executed in this workflow
         
       - name: Build Lint
         run: ./gradlew lintDebug
-      
-      - name: Build Lint
-        run: ./gradlew lintDebug
+    
 
       - name: Upload Build Lint Report
         uses: actions/upload-artifact@v2
