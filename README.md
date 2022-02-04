@@ -39,9 +39,6 @@ These are the app's screenshots and video:
 https://user-images.githubusercontent.com/17760799/152310062-89872d22-d06e-4607-abf0-d4cd0d5f23b0.mp4
 
 
-
-
-
 ## Prerequisite.
 
 In order to be able to build the application you'll need Android Studio Minimum version Arctic Fox 20.20.3.1
