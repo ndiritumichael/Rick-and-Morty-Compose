@@ -21,6 +21,9 @@ jobs: # groups the jobs to be executed in this workflow
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
+        
+      - name: Build Lint
+        run: ./gradlew lintDebug
 
       - name: Build with gradle
         run: ./gradlew build
