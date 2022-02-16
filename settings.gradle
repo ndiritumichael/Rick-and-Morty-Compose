@@ -17,3 +17,4 @@ include ':common-compose'
 
 include ':presentation:ui-locations'
 include ':presentation:ui-episodes'
+include ':presentation:ui-settings'
