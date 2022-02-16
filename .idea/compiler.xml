@@ -11,6 +11,7 @@
       <module name="Rick-and-Morty-Compose.presentation.ui-characters" target="11" />
       <module name="Rick-and-Morty-Compose.presentation.ui-episodes" target="11" />
       <module name="Rick-and-Morty-Compose.presentation.ui-locations" target="11" />
+      <module name="Rick-and-Morty-Compose.presentation.ui-settings" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
