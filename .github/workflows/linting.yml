@@ -31,9 +31,14 @@ jobs: # groups the jobs to be executed in this workflow
         with:
           name: report
           path: app/build/reports/lint-results-debug.html
+          
+      - name: Unit tests results (name)
+        uses: actions/upload-artifact@v1 (Action upload-artifact)
+        with:
+          name: unit-tests-results (Artifacts zip file name)
+          path: app/build/reports/tests/testDebugUnitTest/index.html 
 
-      - name: Build with gradle
-        run: ./gradlew build
+  
 
       - name: Cache Gradle and wrapper
         uses: actions/cache@v2
