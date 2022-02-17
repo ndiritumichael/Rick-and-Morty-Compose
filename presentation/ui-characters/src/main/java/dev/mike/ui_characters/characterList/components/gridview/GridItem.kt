@@ -1,6 +1,7 @@
 package dev.mike.ui_characters.characterList.components.gridview
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,10 +22,13 @@ import dev.mike.ui_characters.characterList.components.CharacterInfo
 import dev.mike.ui_characters.characterList.components.ImageCard
 
 @Composable
-fun GridItem(character: Character) {
+fun GridItem(character: Character, onClick: (Int) -> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier.padding(8.dp)
+            .clickable {
+                onClick(character.id)
+            }
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             ImageCard(
@@ -32,7 +36,7 @@ fun GridItem(character: Character) {
                 modifier = Modifier.fillMaxWidth(0.7f),
                 transformations = listOf(CircleCropTransformation())
             )
-            CharacterInfo(character = character, showExtraInfo =  false, alignment = Alignment.CenterHorizontally)
+            CharacterInfo(character = character, showExtraInfo = false, alignment = Alignment.CenterHorizontally)
         }
     }
 }
@@ -46,7 +50,11 @@ fun CharacterListGrid(
 ) {
     LazyVerticalGrid(cells = GridCells.Fixed(2), state = listState) {
         items(items.itemCount) { index ->
-            items[index]?.let { GridItem(character = it) }
+            items[index]?.let {
+                GridItem(character = it) {
+                    navigate(it)
+                }
+            }
         }
     }
 }
