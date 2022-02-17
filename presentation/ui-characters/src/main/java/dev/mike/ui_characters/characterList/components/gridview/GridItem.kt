@@ -1,5 +1,6 @@
 package dev.mike.ui_characters.characterList.components.gridview
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -22,10 +23,10 @@ import dev.mike.ui_characters.characterList.components.CharacterInfo
 import dev.mike.ui_characters.characterList.components.ImageCard
 
 @Composable
-fun GridItem(character: Character, onClick: (Int) -> Unit) {
+fun GridItem(character: Character, modifier: Modifier = Modifier, onClick: (Int) -> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.padding(8.dp)
+        modifier = modifier.padding(8.dp)
             .clickable {
                 onClick(character.id)
             }
@@ -51,7 +52,7 @@ fun CharacterListGrid(
     LazyVerticalGrid(cells = GridCells.Fixed(2), state = listState) {
         items(items.itemCount) { index ->
             items[index]?.let {
-                GridItem(character = it) {
+                GridItem(character = it, modifier = Modifier.animateContentSize()) {
                     navigate(it)
                 }
             }

@@ -36,7 +36,7 @@ import dev.mike.commons.components.MediumSpacer
 import dev.mike.domain.model.Character
 
 @Composable
-fun CharacterUI(character: Character, onClick: (Int) -> Unit) {
+fun CharacterUI(character: Character, modifier: Modifier = Modifier,onClick: (Int) -> Unit) {
 
     AnimatedVisibility(
 
@@ -45,7 +45,7 @@ fun CharacterUI(character: Character, onClick: (Int) -> Unit) {
         exit = fadeOut()
     ) {
         Card(
-            modifier = Modifier
+            modifier = modifier
                 .animateContentSize()
                 .padding(8.dp)
                 .clickable {
