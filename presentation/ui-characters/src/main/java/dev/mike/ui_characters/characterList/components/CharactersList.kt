@@ -1,6 +1,7 @@
 package dev.mike.ui_characters.characterList.components
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -17,6 +18,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import dev.mike.domain.model.Character
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CharactersListColumn(
     items: LazyPagingItems<Character>,
@@ -26,11 +28,11 @@ fun CharactersListColumn(
     LazyColumn(
         state = listState,
         modifier = Modifier
-            .animateContentSize()
+
     ) {
 
         items(items) { character ->
-            CharacterUI(character = character!!) { id ->
+            CharacterUI(character = character!!,modifier = Modifier.animateItemPlacement()) { id ->
 
                 navigate(id)
             }

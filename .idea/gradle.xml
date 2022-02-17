@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/presentation/ui-characters" />
             <option value="$PROJECT_DIR$/presentation/ui-episodes" />
             <option value="$PROJECT_DIR$/presentation/ui-locations" />
+            <option value="$PROJECT_DIR$/presentation/ui-settings" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
