@@ -32,7 +32,7 @@ fun GridItem(character: Character) {
                 modifier = Modifier.fillMaxWidth(0.7f),
                 transformations = listOf(CircleCropTransformation())
             )
-            CharacterInfo(character = character, alignment = Alignment.CenterHorizontally)
+            CharacterInfo(character = character, showExtraInfo =  false, alignment = Alignment.CenterHorizontally)
         }
     }
 }
