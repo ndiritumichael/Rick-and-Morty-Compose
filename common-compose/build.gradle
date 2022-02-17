@@ -61,6 +61,7 @@ dependencies {
 
     //  use accompanist-placeholder-material
     api "com.google.accompanist:accompanist-placeholder-material:$accompanist"
+   api 'androidx.compose.material:material-icons-extended:1.2.0-alpha03'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 }
