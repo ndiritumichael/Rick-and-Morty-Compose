@@ -125,7 +125,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                                     lazyGridState.scrollToItem(lazyListState.firstVisibleItemIndex)
                                 }
                                 false -> {
-                                    lazyListState.animateScrollToItem(lazyGridState.firstVisibleItemIndex)
+                                    lazyListState.scrollToItem(lazyGridState.firstVisibleItemIndex)
                                 }
                             }
                             showColumn = showColumn.not()
@@ -168,7 +168,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                                         lazyGridState.scrollToItem(lazyListState.firstVisibleItemIndex, lazyListState.firstVisibleItemScrollOffset)
                                     }
                                     false -> {
-                                        lazyListState.animateScrollToItem(lazyGridState.firstVisibleItemIndex, lazyGridState.firstVisibleItemScrollOffset)
+                                        lazyListState.scrollToItem(lazyGridState.firstVisibleItemIndex, lazyGridState.firstVisibleItemScrollOffset)
                                     }
                                 }
                                 showColumn = showColumn.not()
