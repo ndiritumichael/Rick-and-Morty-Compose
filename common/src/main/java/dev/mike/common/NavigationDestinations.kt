@@ -19,6 +19,6 @@ object Locations {
     const val LOCATIONDETAILS = "locationdetails"
 }
 
-object About {
-    const val ABOUTSCREEN = "aboutscreen"
+object SETTINGS {
+    const val SETTINGSGRAPH = "settings"
 }
