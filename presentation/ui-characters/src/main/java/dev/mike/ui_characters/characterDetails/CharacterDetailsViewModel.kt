@@ -9,7 +9,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.mike.domain.model.episodes.Episode
 import dev.mike.domain.usecases.GetCharacterDetailsUsecase
 import dev.mike.domain.usecases.episodes.GetEpisodesUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filter
@@ -32,33 +31,30 @@ class CharacterDetailsViewModel @Inject constructor(
 
     @ExperimentalCoroutinesApi
     val episodesList = episodeIds.filter { list ->
-        Log.d("myflow","$list")
+        Log.d("myflow", "$list")
         list.isEmpty().not()
-
     }.flatMapLatest { idList ->
         val id = idList.joinToString()
 
-    flow {
-        getEpisodesUseCase(id).fold(
-            onSuccess = {
-                emit(
-                    CharacterEpisodesState(
-                        episodesDataList = it
+        flow {
+            getEpisodesUseCase(id).fold(
+                onSuccess = {
+                    emit(
+                        CharacterEpisodesState(
+                            episodesDataList = it
+                        )
                     )
-                )
-
-            },
-            onFailure = {
-                Log.d("myflow", it.localizedMessage)
-                emit(
-                CharacterEpisodesState(
-                   errorMessage = it.localizedMessage?:"Something Went Wrong"
-                ))
-
-            }
-        )
-    }
-
+                },
+                onFailure = {
+                    Log.d("myflow", it.localizedMessage)
+                    emit(
+                        CharacterEpisodesState(
+                            errorMessage = it.localizedMessage ?: "Something Went Wrong"
+                        )
+                    )
+                }
+            )
+        }
     }
 
     init {
@@ -68,8 +64,6 @@ class CharacterDetailsViewModel @Inject constructor(
             characterId.value = id
             getCharacterbyId()
         }
-
-
     }
 
     private fun getCharacterbyId() = viewModelScope.launch {
@@ -78,19 +72,18 @@ class CharacterDetailsViewModel @Inject constructor(
 
         result.onSuccess { details ->
             _detailsState.value = CharacterDetailsState(data = details)
-            episodeIds.value =details.episode
+            episodeIds.value = details.episode
         }
         result.onFailure {
 
-            error ->
+                error ->
             _detailsState.value = CharacterDetailsState(errorMessage = error.message)
         }
     }
 }
 
-
 data class CharacterEpisodesState(
     val isLoading: Boolean = false,
-    val errorMessage:String = "",
-    val episodesDataList :List<Episode> = emptyList()
+    val errorMessage: String = "",
+    val episodesDataList: List<Episode> = emptyList()
 )

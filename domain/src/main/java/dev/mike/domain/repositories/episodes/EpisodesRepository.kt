@@ -5,11 +5,9 @@ import dev.mike.domain.model.episodes.Episode
 import kotlinx.coroutines.flow.Flow
 
 interface EpisodesRepository {
-    suspend fun getAllEpisodes():Flow<PagingData<Episode>>
+    suspend fun getAllEpisodes(): Flow<PagingData<Episode>>
 }
 
-interface SingleEpisodeRepository{
-    suspend fun getEpisode(episodeId:String):Result<List<Episode>>
+interface SingleEpisodeRepository {
+    suspend fun getEpisode(episodeId: String): Result<List<Episode>>
 }
-
-

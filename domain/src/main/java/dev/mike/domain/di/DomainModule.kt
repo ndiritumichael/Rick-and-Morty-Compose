@@ -26,14 +26,11 @@ class CharactersDomainModule {
     fun providesCharacterDetailsUseCase(characterDetailsRepository: CharacterDetailsRepository) = GetCharacterDetailsUsecase(characterDetailsRepository)
 }
 
-
 @Module
 @InstallIn(SingletonComponent::class)
-object EpisodesDomainModule{
+object EpisodesDomainModule {
 
     @Provides
     @Singleton
     fun providesEpisodesUsecase(episodeRepository: SingleEpisodeRepository) = GetEpisodesUseCase(episodeRepository)
-
-
 }
