@@ -18,3 +18,7 @@ include ':common-compose'
 include ':presentation:ui-locations'
 include ':presentation:ui-episodes'
 include ':presentation:ui-settings'
+
+// Enable Gradle's version catalog support
+// https://docs.gradle.org/current/userguide/platforms.html
+

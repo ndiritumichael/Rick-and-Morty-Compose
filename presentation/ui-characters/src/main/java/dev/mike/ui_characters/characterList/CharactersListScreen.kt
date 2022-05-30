@@ -1,4 +1,4 @@
-package dev.mike.ui_characters
+package dev.mike.ui_characters.characterList
 
 import android.widget.Toast
 import androidx.compose.animation.core.FastOutLinearInEasing
@@ -24,13 +24,12 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import dev.mike.commons.components.MediumSpacer
 import dev.mike.commons.utils.CustomToolBar
 import dev.mike.commons.utils.ResetSystemBars
-import dev.mike.ui_characters.characterList.CharactersListViewModel
 import dev.mike.ui_characters.characterList.components.CharactersListColumn
 import dev.mike.ui_characters.characterList.components.gridview.CharacterListGrid
 import kotlinx.coroutines.launch
 import kotlin.math.min
 
-@OptIn(ExperimentalMaterialApi::class, androidx.compose.foundation.ExperimentalFoundationApi::class)
+@OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
 fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
     ResetSystemBars()
@@ -45,7 +44,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
     var showColumn by remember {
         mutableStateOf(true)
     }
-  val layoutIcon =  if (showColumn) Icons.Default.List else Icons.Default.GridView
+  val layoutIcon =  if (showColumn)  Icons.Default.GridView else Icons.Default.List
 
     val scope = rememberCoroutineScope()
 

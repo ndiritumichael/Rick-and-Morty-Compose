@@ -6,13 +6,16 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.Alignment
-import androidx.navigation.*
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
 import dev.mike.common.Characters
 import dev.mike.common.Episodes
-import dev.mike.ui_characters.CharactersList
 import dev.mike.ui_characters.characterDetails.CharacterDetailsScreen
+import dev.mike.ui_characters.characterList.CharactersList
 import dev.mike.ui_characters.charactersSearch.CharactersSearch
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -32,7 +35,7 @@ fun NavGraphBuilder.charactersGraph(
             enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
                 slideInVertically(initialOffsetY = { +1000 }, animationSpec = spring())
 
-               // slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700))
+                // slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700))
             },
             exitTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
                 // scaleOut(targetScale = .5F)
@@ -115,7 +118,13 @@ fun NavGraphBuilder.charactersGraph(
         composable(
             enterTransition = { // initial: NavBackStackEntry, target: NavBackStackEntry ->
 
-                slideInVertically(initialOffsetY = { +1000 }, animationSpec = spring(stiffness = Spring.StiffnessLow, dampingRatio = Spring.DampingRatioHighBouncy))
+                slideInVertically(
+                    initialOffsetY = { +1000 },
+                    animationSpec = spring(
+                        stiffness = Spring.StiffnessLow,
+                        dampingRatio = Spring.DampingRatioHighBouncy
+                    )
+                )
             },
             popExitTransition = {
                 scaleOut()
@@ -125,8 +134,7 @@ fun NavGraphBuilder.charactersGraph(
             route = Characters.CHARACTERSEARCH
         ) {
 
-            CharactersSearch(navigate = {
-                characterId ->
+            CharactersSearch(navigate = { characterId ->
                 navHostController.navigate(Characters.CHARACTERDETAILS + "/$characterId") {
                     launchSingleTop
                 }

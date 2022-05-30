@@ -139,7 +139,7 @@ private fun CustomBottomNavItem(
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .fillMaxHeight()
-                    .padding(start = 11.dp)
+                    .padding(horizontal = 11.dp)
                     .alpha(if (isSelected) 1f else .7f)
                     .size(animatedIconSize),
                 tint = if (isSelected) MaterialTheme.colors.primary else Color.Gray

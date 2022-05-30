@@ -56,8 +56,8 @@ kotlinOptions {
 
 
 dependencies {
-    api(project(":domain"))
-    api(project(":data:repository"))
+    implementation(project(":domain"))
+    implementation(project(":data:repository"))
     api(project(":common-compose"))
     api(project(":common"))
 
@@ -92,6 +92,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
 
     //Dagger - Hilt
+
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
