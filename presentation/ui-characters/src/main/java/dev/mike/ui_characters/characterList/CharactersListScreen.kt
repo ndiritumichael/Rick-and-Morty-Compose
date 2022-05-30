@@ -1,19 +1,16 @@
-package dev.mike.ui_characters
+package dev.mike.ui_characters.characterList
 
 import android.widget.Toast
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.material.icons.filled.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -27,12 +24,12 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import dev.mike.commons.components.MediumSpacer
 import dev.mike.commons.utils.CustomToolBar
 import dev.mike.commons.utils.ResetSystemBars
-import dev.mike.ui_characters.characterList.CharactersListViewModel
 import dev.mike.ui_characters.characterList.components.CharactersListColumn
+import dev.mike.ui_characters.characterList.components.gridview.CharacterListGrid
 import kotlinx.coroutines.launch
 import kotlin.math.min
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
 fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
     ResetSystemBars()
@@ -42,10 +39,23 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
     val viewModel: CharactersListViewModel = hiltViewModel()
     val state = viewModel.characterListState.value
     val lazyListState = rememberLazyListState()
+    val lazyGridState = rememberLazyGridState()
+
+    var showColumn by remember {
+        mutableStateOf(true)
+    }
+  val layoutIcon =  if (showColumn)  Icons.Default.GridView else Icons.Default.List
+
     val scope = rememberCoroutineScope()
-    val scrollOffset = min(
+
+    val scrollOffset = if (showColumn) min(
         1f.coerceAtMost(1f),
         (1 - (lazyListState.firstVisibleItemScrollOffset / 2000f + lazyListState.firstVisibleItemIndex)).coerceAtLeast(
+            0f
+        )
+    ) else min(
+        1f.coerceAtMost(1f),
+        (1 - (lazyGridState.firstVisibleItemScrollOffset / 2000f + lazyGridState.firstVisibleItemIndex)).coerceAtLeast(
             0f
         )
     )
@@ -106,6 +116,22 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                     ) {
                         Icon(imageVector = Icons.Default.Search, contentDescription = null)
                     }*/
+                    IconButton(onClick = {
+                        scope.launch {
+
+                            when (showColumn) {
+                                true -> {
+                                    lazyGridState.scrollToItem(lazyListState.firstVisibleItemIndex)
+                                }
+                                false -> {
+                                    lazyListState.scrollToItem(lazyGridState.firstVisibleItemIndex)
+                                }
+                            }
+                            showColumn = showColumn.not()
+                        }
+                    }) {
+                        Icon(imageVector = layoutIcon, contentDescription = null)
+                    }
 
                     IconButton(
                         onClick = {
@@ -133,6 +159,22 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                         ) {
                             Icon(imageVector = Icons.Default.Search, contentDescription = null)
                         }
+                        IconButton(onClick = {
+                            scope.launch {
+
+                                when (showColumn) {
+                                    true -> {
+                                        lazyGridState.scrollToItem(lazyListState.firstVisibleItemIndex, lazyListState.firstVisibleItemScrollOffset)
+                                    }
+                                    false -> {
+                                        lazyListState.scrollToItem(lazyGridState.firstVisibleItemIndex, lazyGridState.firstVisibleItemScrollOffset)
+                                    }
+                                }
+                                showColumn = showColumn.not()
+                            }
+                        }) {
+                            Icon(imageVector = layoutIcon , contentDescription = null)
+                        }
                         IconButton(onClick = {}) {
                             Icon(
                                 imageVector = Icons.Default.Settings,
@@ -147,7 +189,12 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
         floatingActionButton = {
             if (scrollOffset == 0f) {
                 FloatingActionButton(
-                    onClick = { scope.launch { lazyListState.animateScrollToItem(0) } },
+                    onClick = {
+                        scope.launch {
+                            lazyListState.animateScrollToItem(0)
+                            lazyGridState.animateScrollToItem(0)
+                        }
+                    },
                     modifier = Modifier.padding(bottom = 70.dp)
                 ) {
                     Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
@@ -168,8 +215,14 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
 
         characters?.let { items ->
 
-            CharactersListColumn(items = items, listState = lazyListState) { characterId ->
-                navigate(characterId)
+            if (showColumn) {
+                CharactersListColumn(items = items, listState = lazyListState) { characterId ->
+                    navigate(characterId)
+                }
+            } else {
+                CharacterListGrid(items = items, lazyGridState) { characterId ->
+                    navigate(characterId)
+                }
             }
         }
     }

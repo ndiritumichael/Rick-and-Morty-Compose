@@ -19,6 +19,9 @@ class CharacterRepositoryModule {
     @Provides
     fun providesCharacterRepository(apiService: ApiService): CharactersRepository = CharactersRepositoryImpl(apiService)
 
+
+
+
     @Singleton
     @Provides
     fun providesCharacterDetailsRepository(apiService: ApiService): CharacterDetailsRepository =

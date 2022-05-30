@@ -24,9 +24,8 @@ class MainActivity : ComponentActivity() {
         androidx.compose.animation.ExperimentalAnimationApi::class
     )
     override fun onCreate(savedInstanceState: Bundle?) {
-     installSplashScreen().apply{
-
-     }
+        installSplashScreen().apply {
+        }
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
@@ -36,16 +35,7 @@ class MainActivity : ComponentActivity() {
 
                 ProvideWindowInsets() {
 
-                    // A surface container using the 'background' color from the theme
-                  /*  Surface(
-                        color = MaterialTheme.colors.background,
-                        modifier = Modifier
-                            .statusBarsPadding()
-                            .navigationBarsPadding()
-                    ) {*/
-
                     AppContent()
-                    // }
                 }
             }
         }

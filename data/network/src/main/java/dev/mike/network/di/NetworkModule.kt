@@ -26,7 +26,7 @@ object NetworkModule {
 
     private fun okHttpClient1(): OkHttpClient.Builder {
         val okHttpClient = OkHttpClient.Builder()
-        okHttpClient.connectTimeout(30, TimeUnit.SECONDS)
+        okHttpClient.connectTimeout(10, TimeUnit.SECONDS)
         okHttpClient.readTimeout(30, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(30, TimeUnit.SECONDS)
 
