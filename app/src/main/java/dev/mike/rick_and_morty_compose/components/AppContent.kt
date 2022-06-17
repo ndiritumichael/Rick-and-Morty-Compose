@@ -2,6 +2,7 @@ package dev.mike.rick_and_morty_compose.components
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -38,8 +39,8 @@ fun AppContent() {
                 BottomNavigationBar(navController)
             }
         }
-    ) { _ ->
+    ) { padding ->
 
-        MainNavigation(navhostController = navController)
+        MainNavigation(navhostController = navController, modifier = Modifier.padding(padding))
     }
 }

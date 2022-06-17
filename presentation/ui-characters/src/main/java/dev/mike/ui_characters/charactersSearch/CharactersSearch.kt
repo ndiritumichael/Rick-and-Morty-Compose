@@ -1,9 +1,11 @@
 package dev.mike.ui_characters.charactersSearch
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import dev.mike.commons.components.CustomSearchBar
@@ -42,10 +44,10 @@ fun CharactersSearch(
                 }
             )
         }
-    ) {
+    ) { paddingvalues ->
 
         characters?.let { searchCharacters ->
-            CharactersListColumn(items = searchCharacters) { id ->
+            CharactersListColumn(modifier = Modifier.padding(paddingvalues), items = searchCharacters) { id ->
                 navigate(id)
             }
         }

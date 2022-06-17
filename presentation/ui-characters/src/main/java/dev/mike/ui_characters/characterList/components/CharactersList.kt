@@ -20,13 +20,14 @@ import dev.mike.domain.model.Character
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CharactersListColumn(
+    modifier: Modifier = Modifier,
     items: LazyPagingItems<Character>,
     listState: LazyListState = rememberLazyListState(),
     navigate: (Int) -> Unit = {}
 ) {
     LazyColumn(
         state = listState,
-        modifier = Modifier
+        modifier = modifier
 
     ) {
 
