@@ -1,6 +1,7 @@
 package dev.mike.ui_characters.characterList
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -32,6 +33,7 @@ import kotlin.math.min
 @OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
 fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
+
     ResetSystemBars()
 
     val context = LocalContext.current
@@ -44,7 +46,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
     var showColumn by remember {
         mutableStateOf(true)
     }
-  val layoutIcon =  if (showColumn)  Icons.Default.GridView else Icons.Default.List
+    val layoutIcon = if (showColumn) Icons.Default.GridView else Icons.Default.List
 
     val scope = rememberCoroutineScope()
 
@@ -173,7 +175,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                                 showColumn = showColumn.not()
                             }
                         }) {
-                            Icon(imageVector = layoutIcon , contentDescription = null)
+                            Icon(imageVector = layoutIcon, contentDescription = null)
                         }
                         IconButton(onClick = {}) {
                             Icon(
@@ -187,7 +189,9 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            if (scrollOffset == 0f) {
+
+            AnimatedVisibility(visible = scrollOffset == 0f) {
+
                 FloatingActionButton(
                     onClick = {
                         scope.launch {
@@ -199,10 +203,11 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                 ) {
                     Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
                 }
+//
+            }
                 /* IconButton(onClick = { scope.launch { lazyListState.animateScrollToItem(1) } }) {
                 Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
             }*/
-            }
         }
     ) {
 

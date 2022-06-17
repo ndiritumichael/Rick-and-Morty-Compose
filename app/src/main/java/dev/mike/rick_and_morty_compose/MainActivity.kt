@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
 
             RickandMortyComposeTheme {
 
-                ProvideWindowInsets() {
+                ProvideWindowInsets {
 
                     AppContent()
                 }

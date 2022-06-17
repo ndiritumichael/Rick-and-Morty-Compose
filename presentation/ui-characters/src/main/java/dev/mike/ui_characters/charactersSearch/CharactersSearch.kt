@@ -36,7 +36,8 @@ fun CharactersSearch(
             CustomSearchBar(
                 value = searchString,
                 placeholder = "Search Characters",
-                navigateUp = navigateUp, onValueChange = { name ->
+                navigateUp = navigateUp,
+                onValueChange = { name ->
                     viewModel.searchCharacter(name)
                 }
             )
