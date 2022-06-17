@@ -1,6 +1,5 @@
 package dev.mike.ui_characters.characterList.components
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,7 +31,7 @@ fun CharactersListColumn(
     ) {
 
         items(items) { character ->
-            CharacterUI(character = character!!,modifier = Modifier.animateItemPlacement()) { id ->
+            CharacterUI(character = character!!, modifier = Modifier.animateItemPlacement()) { id ->
 
                 navigate(id)
             }
@@ -62,7 +61,7 @@ fun CharactersListColumn(
 
                     item {
                         Box(
-                            modifier =  Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth()
                                 .padding(bottom = 56.dp),
                             contentAlignment = Alignment.Center
                         ) {
@@ -122,9 +121,9 @@ fun CharactersListColumn(
             }
         }
 /**  WARNING adding this to a  lazy column makes iit lose state
-        item {
-            Box(modifier = Modifier.height(60.dp)
-                .padding(56.dp))
-        }*/
+         item {
+         Box(modifier = Modifier.height(60.dp)
+         .padding(56.dp))
+         }*/
     }
 }

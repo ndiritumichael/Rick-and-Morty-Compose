@@ -210,11 +210,11 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                 Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
             }*/
         }
-    ) { padding ->
+    ) {
 
         if (state.errorMessage.isNotEmpty()) {
 
-            Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(text = state.errorMessage)
             }
         }
