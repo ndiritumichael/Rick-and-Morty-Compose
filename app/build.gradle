@@ -80,6 +80,7 @@ dependencies {
     implementation libs.androidx.core.splashscreen
 
     implementation libs.design.material.'2'
+    implementation libs.design.material.general
     testImplementation libs.junit4
 
 
