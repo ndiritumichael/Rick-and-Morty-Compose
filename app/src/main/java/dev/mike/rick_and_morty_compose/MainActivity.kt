@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
-import com.google.accompanist.insets.ProvideWindowInsets
 import dagger.hilt.android.AndroidEntryPoint
 import dev.mike.common.Constants.common
 import dev.mike.commons.ui.theme.RickandMortyComposeTheme
@@ -21,7 +20,7 @@ class MainActivity : ComponentActivity() {
 
     @OptIn(
         ExperimentalMaterialApi::class,
-        androidx.compose.animation.ExperimentalAnimationApi::class
+        ExperimentalAnimationApi::class
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen().apply {
@@ -33,10 +32,7 @@ class MainActivity : ComponentActivity() {
 
             RickandMortyComposeTheme {
 
-                ProvideWindowInsets() {
-
-                    AppContent()
-                }
+                AppContent()
             }
         }
     }

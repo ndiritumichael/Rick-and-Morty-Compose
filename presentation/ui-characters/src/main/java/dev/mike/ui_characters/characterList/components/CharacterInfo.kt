@@ -54,7 +54,7 @@ fun CharacterUI(character: Character, modifier: Modifier = Modifier,onClick: (In
             shape = RoundedCornerShape(8.dp),
             elevation = 8.dp
         ) {
-            Row() {
+            Row {
                 ImageCard(
                     imageLink = character.imageUrl,
                     modifier = Modifier
