@@ -95,7 +95,7 @@ dagger-hilt-android= { module = "com.google.dagger:hilt-android",version.ref = "
 dagger-hilt-testing= { module = "'com.google.dagger:hilt-android-testing",version.ref = "hilt"}
 dagger-hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
 
-design-material-2 = {module = "com.google.android.material:material",version.ref = "compose_version"}
+design-material-2 = {module = "androidx.compose.material:material",version.ref = "compose_version"}
 design-material-3 = {module = "androidx.compose.material3:material3",version.ref = "material3"}
 design-material-extended = { module = "androidx.compose.material:material-icons-extended",version.ref = "compose_version"}
 
