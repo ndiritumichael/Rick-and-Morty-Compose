@@ -27,13 +27,13 @@ jobs: # groups the jobs to be executed in this workflow
     
 
       - name: Upload Build Lint Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: report
           path: app/build/reports/lint-results-debug.html
           
       - name: Unit tests results (name)
-        uses: actions/upload-artifact@v1 (Action upload-artifact)
+        uses: actions/upload-artifact@v3 (Action upload-artifact)
         with:
           name: unit-tests-results (Artifacts zip file name)
           path: app/build/reports/tests/testDebugUnitTest/index.html 
