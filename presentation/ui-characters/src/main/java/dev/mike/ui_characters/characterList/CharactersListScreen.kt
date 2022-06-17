@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-
 import dev.mike.commons.components.MediumSpacer
 import dev.mike.commons.utils.CustomToolBar
 import dev.mike.commons.utils.ResetSystemBars
@@ -211,23 +210,28 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
             }*/
         }
     ) {
+        Box(modifier = Modifier.padding(it)) {
 
-        if (state.errorMessage.isNotEmpty()) {
+            if (state.errorMessage.isNotEmpty()) {
 
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = state.errorMessage)
-            }
-        }
-
-        characters?.let { items ->
-
-            if (showColumn) {
-                CharactersListColumn(items = items, listState = lazyListState) { characterId ->
-                    navigate(characterId)
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = state.errorMessage)
                 }
-            } else {
-                CharacterListGrid(items = items, lazyGridState) { characterId ->
-                    navigate(characterId)
+            }
+
+            characters?.let { items ->
+
+                if (showColumn) {
+                    CharactersListColumn(items = items, listState = lazyListState) { characterId ->
+                        navigate(characterId)
+                    }
+                } else {
+                    CharacterListGrid(items = items, lazyGridState) { characterId ->
+                        navigate(characterId)
+                    }
                 }
             }
         }
