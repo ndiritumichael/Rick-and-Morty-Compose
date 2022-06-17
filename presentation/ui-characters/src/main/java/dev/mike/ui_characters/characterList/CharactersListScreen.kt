@@ -6,7 +6,7 @@ import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.rememberLazyGridState
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -129,8 +129,8 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                                     lazyListState.scrollToItem(lazyGridState.firstVisibleItemIndex)
                                 }
                             }
-                            showColumn = showColumn.not()
                         }
+                        showColumn = showColumn.not()
                     }) {
                         Icon(imageVector = layoutIcon, contentDescription = null)
                     }
@@ -209,11 +209,11 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                 Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
             }*/
         }
-    ) {
+    ) { padding ->
 
         if (state.errorMessage.isNotEmpty()) {
 
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
                 Text(text = state.errorMessage)
             }
         }

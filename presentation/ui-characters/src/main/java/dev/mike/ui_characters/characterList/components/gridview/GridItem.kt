@@ -1,15 +1,14 @@
 package dev.mike.ui_characters.characterList.components.gridview
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyGridState
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.rememberLazyGridState
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -42,17 +41,18 @@ fun GridItem(character: Character, modifier: Modifier = Modifier, onClick: (Int)
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CharacterListGrid(
     items: LazyPagingItems<Character>,
     listState: LazyGridState = rememberLazyGridState(),
     navigate: (Int) -> Unit = {}
 ) {
-    LazyVerticalGrid(cells = GridCells.Fixed(2), state = listState) {
+
+    LazyVerticalGrid(columns = GridCells.Fixed(2), state = listState) {
+
         items(items.itemCount) { index ->
-            items[index]?.let {
-                GridItem(character = it, modifier = Modifier.animateContentSize()) {
+            items[index]?.let { character ->
+                GridItem(character = character, modifier = Modifier.animateContentSize()) {
                     navigate(it)
                 }
             }
