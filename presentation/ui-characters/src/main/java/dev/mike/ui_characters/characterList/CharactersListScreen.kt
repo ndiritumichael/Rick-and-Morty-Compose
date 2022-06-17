@@ -98,7 +98,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                     ) {
                         Icon(
                             imageVector = Icons.Default.Search,
-                            contentDescription = null
+                            contentDescription = "search"
                         )
                         MediumSpacer()
                         Text(
