@@ -44,7 +44,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
     val lazyGridState = rememberLazyGridState()
 
     var showColumn by remember {
-        mutableStateOf(true)
+        mutableStateOf(false)
     }
     val layoutIcon = if (showColumn) Icons.Default.GridView else Icons.Default.List
 
