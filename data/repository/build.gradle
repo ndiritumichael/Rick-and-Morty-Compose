@@ -41,6 +41,8 @@ dependencies {
 
     testImplementation libs.mockK
     testImplementation libs.bundles.unittest
+    testImplementation libs.json.convertor
+    testImplementation libs.json.serializer
 
 
 

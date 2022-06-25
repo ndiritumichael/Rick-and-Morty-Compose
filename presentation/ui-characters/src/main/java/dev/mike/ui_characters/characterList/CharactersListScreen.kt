@@ -33,7 +33,6 @@ import kotlin.math.min
 @OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
 fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
-
     ResetSystemBars()
 
     val context = LocalContext.current
@@ -44,7 +43,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
     val lazyGridState = rememberLazyGridState()
 
     var showColumn by remember {
-        mutableStateOf(false)
+        mutableStateOf(true)
     }
     val layoutIcon = if (showColumn) Icons.Default.GridView else Icons.Default.List
 
@@ -110,15 +109,8 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                         )
                     }
 
-/* IconButton(
-                        modifier = Modifier
-                            .weight(9f)
-                            ,
-                        onClick = { searchScreen() }
-                    ) {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = null)
-                    }*/
                     IconButton(onClick = {
+
                         scope.launch {
 
                             when (showColumn) {
@@ -162,6 +154,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                             Icon(imageVector = Icons.Default.Search, contentDescription = null)
                         }
                         IconButton(onClick = {
+
                             scope.launch {
 
                                 when (showColumn) {
@@ -172,8 +165,9 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                                         lazyListState.scrollToItem(lazyGridState.firstVisibleItemIndex, lazyGridState.firstVisibleItemScrollOffset)
                                     }
                                 }
-                                showColumn = showColumn.not()
                             }
+
+                            showColumn = showColumn.not()
                         }) {
                             Icon(imageVector = layoutIcon, contentDescription = null)
                         }
