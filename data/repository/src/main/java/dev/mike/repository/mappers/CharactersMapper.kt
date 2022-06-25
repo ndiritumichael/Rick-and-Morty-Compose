@@ -1,12 +1,11 @@
 package dev.mike.repository.mappers
 
-import android.net.Uri
 import dev.mike.domain.model.Character
 import dev.mike.domain.model.CharacterDetails
-import dev.mike.network.models.characters.CharactersDto
 import dev.mike.network.models.characters.ResultDto
 import dev.mike.network.models.characters.singleCharacter.SingleCharacterDto
-import dev.mike.repository.utils.getIntFromUrl
+import dev.mike.repository.utils.getEpisodeIntFromUrl
+import dev.mike.repository.utils.getPageIntFromUrl
 
 fun ResultDto.toCharacter(): Character {
 
@@ -30,7 +29,7 @@ fun SingleCharacterDto.toCharacter(): CharacterDetails {
         gender = gender,
         status = status,
         episode = episode.map { episode ->
-          getIntFromUrl(episode) ?: 0
+          getEpisodeIntFromUrl(episode) ?: 0
 
         },
         location = location.name,

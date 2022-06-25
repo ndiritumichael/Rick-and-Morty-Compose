@@ -28,8 +28,6 @@ class CharactersRepositoryTest : BaseTest() {
 
         val expectedCharacter = SampleData.page1CharacterDTO
 
-
-
         assertThat(actualCharacters.results, hasItem(expectedCharacter))
     }
 
@@ -58,9 +56,6 @@ class CharactersRepositoryTest : BaseTest() {
             charactersRepository.getCharacterDetails(10000)
         } catch (e: Exception) {
             assertThat(e.message, containsString("HTTP 404"))
-
         }
     }
-
-
 }

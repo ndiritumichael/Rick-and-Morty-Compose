@@ -1,11 +1,11 @@
 package dev.mike.repository.datasources
 
-import android.net.Uri
 import androidx.paging.* // ktlint-disable no-wildcard-imports
 import dev.mike.domain.model.Character
 import dev.mike.domain.repositories.CharactersRepository
 import dev.mike.network.source.IRemoteCharactersRepository
 import dev.mike.repository.mappers.toCharacter
+import dev.mike.repository.utils.getPageIntFromUrl
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -39,8 +39,13 @@ class CharactersPagingSource(
             }
             var nextPage: Int? = null
             if (charactersResponse.info.next != null) {
-                val uri = Uri.parse(charactersResponse.info.next)
-                nextPage = uri.getQueryParameter("page")?.toInt()
+
+                /** fetching next Page wworks with production code but fails on unit tests due to android depedency
+                 * val uri = Uri.parse(charactersResponse.info.next)
+                 * nextpage = uri.getQueryParameter("page")?.toInt()
+                 */
+
+                nextPage = getPageIntFromUrl(charactersResponse.info.next!!)
             }
             LoadResult.Page(
                 data = characters,

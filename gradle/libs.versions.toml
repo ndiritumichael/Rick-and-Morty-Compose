@@ -130,6 +130,7 @@ retrofit-mock = { module = "com.squareup.retrofit2:retrofit-mock", version.ref =
 
 square-logcat = 'com.squareup.logcat:logcat:0.1'
 
+
 testing-junit4 = { module =  "junit:junit",version.ref=  "junitVersion"}
 testing-hamcrest = { module = "org.hamcrest:hamcrest-all", version.ref ="hamcrestVersion"}
 

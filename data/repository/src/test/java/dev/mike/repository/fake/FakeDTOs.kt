@@ -14,7 +14,7 @@ object FakeDTOs {
 
     val characterspage1 = String(FileInputStream("src/test/raw/characterspage1.json").readBytes())
     val characterspage2 = String(FileInputStream("src/test/raw/characterspage2.json").readBytes())
-    val characterspage3 = String(FileInputStream("src/main/res/raw/characterspage3.json").readBytes())
+    val characterspage3 = String(FileInputStream("src/test/raw/characterspage3.json").readBytes())
 
     val episodespage1 = String(FileInputStream("src/test/raw/episodespage1.json").readBytes())
 

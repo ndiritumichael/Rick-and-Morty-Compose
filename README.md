@@ -41,7 +41,7 @@ https://user-images.githubusercontent.com/17760799/152310062-89872d22-d06e-4607-
 
 ## Prerequisite.
 
-In order to be able to build the application you'll need Android Studio Minimum version Arctic Fox 20.20.3.1
+In order to be able to build the application you'll need Android Studio Minimum version Android Studio Electric Eel Canary 5
 
 
 ## Disclaimer.

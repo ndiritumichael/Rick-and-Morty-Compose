@@ -1,5 +1,6 @@
 package dev.mike.repository.fake
 
+import android.content.res.Resources
 import dev.mike.network.models.characters.CharactersDto
 import dev.mike.network.models.characters.ResultDto
 import dev.mike.network.models.characters.singleCharacter.SingleCharacterDto
@@ -25,13 +26,16 @@ class FakeCharactersRepository : IRemoteCharactersRepository {
     }
     override suspend fun getCharacters(page: Int, name: String?): CharactersDto {
         return charactersPages.getOrElse(page) {
-            throw Exception("Not Found")
+            throw NotFoundException()
         }
     }
 
     override suspend fun getCharacterDetails(characterId: Int): SingleCharacterDto {
         return allCharacters.find { character ->
             character.id == characterId
-        }?.toSingleCharacter() ?: throw Exception("Not Found")
+        }?.toSingleCharacter() ?: throw Resources.NotFoundException()
     }
 }
+class NotFoundException:Exception("Not Found")
+
+
