@@ -137,7 +137,6 @@ This project uses some of the popular libraries, plugins and tools of the androi
     
     -   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Designed to store and manage UI-related data in a lifecycle conscious way. The ViewModel class allows data to survive configuration changes such as screen rotations.
     
-    - [Room](https://developer.android.com/training/data-storage/room) - Provides an abstraction layer over SQLite used for offline data caching.
     - [Navigation Component](https://developer.android.com/guide/navigation/navigation-getting-started) -Component that allows easier implementation of navigation from simple button clicks to more complex patterns.
 
 
@@ -159,17 +158,17 @@ and supports coroutines out of the box.
 ## Testing
 
 The tests are mainly unit tests covering the Network layer and Domain layer and also viewmodel tests for the characters module,main Libraries used for
-testing include:
+testing include:          
 
--[MockWebserver](https://github.com/square/okhttp/tree/master/mockwebserver) - A scriptable web
+  - [MockWebserver](https://github.com/square/okhttp/tree/master/mockwebserver) - A scriptable web
 server for testing HTTP clients.
--[Junit](https://junit.org/junit4/) - JUnit is a simple framework
+  - [Junit](https://junit.org/junit4/) - JUnit is a simple framework
 to write repeatable tests
--[Hamcrest](http://hamcrest.org/) - Matchers that can be combined to
+  - [Hamcrest](http://hamcrest.org/) - Matchers that can be combined to
 create flexible expressions of intent
--[Coroutines Testing](https://developer.android.com/kotlin/coroutines/test) - Test utilities for
+  - [Coroutines Testing](https://developer.android.com/kotlin/coroutines/test) - Test utilities for
 kotlinx.coroutines.
--[CashApp Turbine](https://github.com/cashapp/turbine) - A small testing library for kotlinx.coroutines Flow
+  - [CashApp Turbine](https://github.com/cashapp/turbine) - A small testing library for kotlinx.coroutines Flow
   
 
 # Helpful Resources
