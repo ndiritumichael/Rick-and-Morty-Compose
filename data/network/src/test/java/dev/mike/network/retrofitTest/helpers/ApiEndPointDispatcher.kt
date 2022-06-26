@@ -1,6 +1,6 @@
 package dev.mike.network.retrofitTest.helpers
 
-import dev.mike.network.JsonData
+import dev.mike.common.fakedata.FakeDTOs
 import dev.mike.network.utils.CHARACTERSPATH
 import dev.mike.network.utils.EPISODEID
 import dev.mike.network.utils.EPISODESPATH
@@ -16,10 +16,10 @@ open class ApiEndPointDispatcher : Dispatcher() {
 
             "/$CHARACTERSPATH?page=1" -> MockResponse()
                 .setResponseCode(200)
-                .setBody(JsonData.characterspage1)
+                .setBody(FakeDTOs.characterspage1)
             "/$CHARACTERSPATH/?page=2" -> MockResponse()
                 .setResponseCode(200)
-                .setBody(JsonData.characterspage2)
+                .setBody(FakeDTOs.characterspage2)
 
             "/$CHARACTERSPATH/?page=1000" -> {
                 MockResponse()
@@ -29,7 +29,7 @@ open class ApiEndPointDispatcher : Dispatcher() {
             "/$CHARACTERSPATH/1" -> {
                 MockResponse()
                     .setResponseCode(200)
-                    .setBody(JsonData.mortyDetails)
+                    .setBody(FakeDTOs.mortyDetails)
             }
             "/$CHARACTERSPATH/10000" -> {
                 MockResponse()
@@ -39,13 +39,13 @@ open class ApiEndPointDispatcher : Dispatcher() {
             "/$EPISODESPATH?page=1" -> {
                 MockResponse()
                     .setResponseCode(200)
-                    .setBody(JsonData.episodespage1)
+                    .setBody(FakeDTOs.episodespage1)
             }
 
-            "/"+ EPISODEID+"28" -> {
+            "/" + EPISODEID + "28" -> {
                 MockResponse()
                     .setResponseCode(200)
-                    .setBody(JsonData.episode28)
+                    .setBody(FakeDTOs.episode28)
             }
 
             else -> {

@@ -1,4 +1,6 @@
-{
+package dev.mike.common.fakedata
+
+val charactersPage3Json = """{
   "info": {
     "count": 826,
     "pages": 42,
@@ -459,3 +461,4 @@
     }
   ]
 }
+""".trimIndent()

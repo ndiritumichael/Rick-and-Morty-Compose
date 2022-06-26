@@ -50,7 +50,7 @@ fun CharacterDetailsScreen(
     val lazyListState = rememberLazyListState()
     val scrollOffset = min(
         1f.coerceAtMost(1f),
-        (1 - (lazyListState.firstVisibleItemScrollOffset / 2000f + lazyListState.firstVisibleItemIndex)).coerceAtLeast(
+        (1 - (remember { derivedStateOf { lazyListState.firstVisibleItemScrollOffset } }.value/ 2000f + remember { derivedStateOf { lazyListState.firstVisibleItemIndex } }.value)).coerceAtLeast(
             0f
         )
     )

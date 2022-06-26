@@ -13,6 +13,9 @@ import org.junit.Before
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
+
+
+@OptIn(ExperimentalSerializationApi::class)
 open class BaseTest {
 
     private lateinit var mockWebServer: MockWebServer
@@ -23,7 +26,6 @@ open class BaseTest {
 
     private lateinit var loggingInterceptor: HttpLoggingInterceptor
     private val json = Json { ignoreUnknownKeys = true }
-    @OptIn(ExperimentalSerializationApi::class)
     private val converter = json.asConverterFactory("application/json".toMediaType())
 
     @Before

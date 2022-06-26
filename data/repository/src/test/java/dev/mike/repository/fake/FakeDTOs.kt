@@ -1,5 +1,6 @@
 package dev.mike.repository.fake
 
+import dev.mike.common.fakedata.FakeDTOs
 import dev.mike.network.models.characters.CharactersDto
 import dev.mike.network.models.characters.LocationDto
 import dev.mike.network.models.characters.Origin
@@ -10,18 +11,7 @@ import kotlinx.serialization.json.Json
 import java.io.FileInputStream
 
 val testjson = Json { ignoreUnknownKeys = true }
-object FakeDTOs {
 
-    val characterspage1 = String(FileInputStream("src/test/raw/characterspage1.json").readBytes())
-    val characterspage2 = String(FileInputStream("src/test/raw/characterspage2.json").readBytes())
-    val characterspage3 = String(FileInputStream("src/test/raw/characterspage3.json").readBytes())
-
-    val episodespage1 = String(FileInputStream("src/test/raw/episodespage1.json").readBytes())
-
-    val mortyDetails = String(FileInputStream("src/test/raw/mortydetails.json").readBytes())
-    val rickDetails = String(FileInputStream("src/test/raw/ricksanchezdetails.json").readBytes())
-    val episode28 = String(FileInputStream("src/test/raw/episode28.json").readBytes())
-}
 
 object SampleData {
     val episode28 = testjson.decodeFromString<SingleEpisodeDTO>(FakeDTOs.episode28)

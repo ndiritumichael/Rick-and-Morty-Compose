@@ -1,28 +1,24 @@
-package dev.mike.network
+package com.dev.mike.core_testing.fake
 
-import dev.mike.common.fakedata.FakeDTOs
+import dev.mike.common.fakedata.*
+import dev.mike.network.models.characters.CharactersDto
 import dev.mike.network.models.characters.LocationDto
 import dev.mike.network.models.characters.Origin
 import dev.mike.network.models.characters.ResultDto
 import dev.mike.network.models.episodes.singleepisode.SingleEpisodeDTO
-import dev.mike.network.utils.json
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 
-/*object JsonData {
+val testjson = Json { ignoreUnknownKeys = true }
 
-    val characterspage1 = String(FileInputStream("src/main/res/raw/characterspage1.json").readBytes())
-    val characterspage2 = String(FileInputStream("src/main/res/raw/characterspage2.json").readBytes())
 
-    val episodespage1 = String(FileInputStream("src/main/res/raw/episodespage1.json").readBytes())
+object CoreTestingSampleData {
+    val episode28 = testjson.decodeFromString<SingleEpisodeDTO>(FakeDTOs.episode28)
 
-    val mortyDetails = String(FileInputStream("src/main/res/raw/mortydetails.json").readBytes())
-    val rickDetails = String(FileInputStream("src/main/res/raw/ricksanchezdetails.json").readBytes())
-    val episode28 = String(FileInputStream("src/main/res/raw/episode28.json").readBytes())
-}*/
-
-object SampleData {
-    val episode28 = json.decodeFromString<SingleEpisodeDTO>(FakeDTOs.episode28)
+    val page1CharactersDto = testjson.decodeFromString<CharactersDto>(FakeDTOs.characterspage1)
+    val page2CharactersDto = testjson.decodeFromString<CharactersDto>(FakeDTOs.characterspage2)
+    val page3CharactersDto = testjson.decodeFromString<CharactersDto>(FakeDTOs.characterspage3)
 
     val page1CharacterDTO = ResultDto(
         created = "2017-11-04T18:50:21.651Z",
