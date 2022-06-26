@@ -1,7 +1,7 @@
 [versions]
 accompanist = "0.24.10-beta"
 androidxCore = "1.7.0"
-androidGradlePlugin = "7.4.0-alpha05"
+androidGradlePlugin = "7.2.1"
 androidXSplash ="1.0.0-rc01"
 androidxDataStore = "1.0.0"
 androidxhilt = "1.0.0"
