@@ -158,7 +158,7 @@ and supports coroutines out of the box.
 
 ## Testing
 
-The tests are mainly unit tests covering the Network layer and Domain layer ,main Libraries use for
+The tests are mainly unit tests covering the Network layer and Domain layer and also viewmodel tests for the characters module,main Libraries used for
 testing include:
 
 -[MockWebserver](https://github.com/square/okhttp/tree/master/mockwebserver) - A scriptable web
