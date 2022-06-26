@@ -2,12 +2,12 @@ package dev.mike.repository.datasources.episodes
 
 import dev.mike.domain.model.episodes.Episode
 import dev.mike.domain.repositories.episodes.SingleEpisodeRepository
-import dev.mike.network.ApiService
+import dev.mike.network.source.IEpisodesRepository
 import dev.mike.repository.mappers.toEpisode
 import dev.mike.repository.utils.BaseRepository
 import javax.inject.Inject
 
-class EpisodesRepositoryImpl @Inject constructor(private val apiService: ApiService) :
+class EpisodesRepositoryImpl @Inject constructor(private val repository: IEpisodesRepository) :
     SingleEpisodeRepository, BaseRepository() {
 
     override suspend fun getEpisode(episodeId: String): Result<List<Episode>> {
@@ -19,7 +19,7 @@ class EpisodesRepositoryImpl @Inject constructor(private val apiService: ApiServ
 
             episodeId.length > 2 -> {
                 safeApiCall {
-                    apiService.getEpisode(episodeId).map { singleEpisodeDTO ->
+                    repository.getEpisode(episodeId).map { singleEpisodeDTO ->
                         singleEpisodeDTO.toEpisode()
                     }
                 }
@@ -29,7 +29,7 @@ class EpisodesRepositoryImpl @Inject constructor(private val apiService: ApiServ
                 safeApiCall {
 
                     listOf(
-                        apiService.getoneEpisode(episodeId).toEpisode()
+                        repository.getoneEpisode(episodeId).toEpisode()
                     )
                 }
             }

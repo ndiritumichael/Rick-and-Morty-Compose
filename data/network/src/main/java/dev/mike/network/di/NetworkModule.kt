@@ -7,6 +7,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.mike.network.ApiService
 import dev.mike.network.BuildConfig
+import dev.mike.network.utils.BASE_URL
+import dev.mike.network.utils.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -19,8 +21,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL = "https://rickandmortyapi.com/api/"
-    private val json = Json { ignoreUnknownKeys = true }
+
     @ExperimentalSerializationApi
     private val converter = json.asConverterFactory("application/json".toMediaType())
 

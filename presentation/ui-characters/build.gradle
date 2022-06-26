@@ -52,6 +52,11 @@ kotlinOptions {
     hilt {
         enableAggregatingTask = true
     }
+    lintOptions {
+        //lint error caused by using late init var in tests
+        //https://github.com/google/dagger/issues/3201
+        disable "JvmStaticProvidesInObjectDetector", "FieldSiteTargetOnQualifierAnnotation", "ModuleCompanionObjects", "ModuleCompanionObjectsNotInModuleParent"
+    }
 }
 
 
@@ -78,13 +83,18 @@ dependencies {
 
    // composetest
     testImplementation libs.junit4
+    testImplementation libs.turbine
+    testApi(project(":core-testing"))
     androidTestImplementation libs.androidx.test.espresso.core
     androidTestImplementation libs.androidx.test.junitexp
     androidTestImplementation libs.androidx.compose.ui.test
 
+    testApi libs.androidx.test.core
+    testApi libs.androidx.test.rules
+
 
     //constraint
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0"
+    implementation libs.androidx.compose.constraintlayout
 
     // Coroutines
 

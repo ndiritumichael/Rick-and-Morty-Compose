@@ -32,15 +32,23 @@ android {
     hilt {
         enableAggregatingTask = true
     }
+    lintOptions {
+        disable "JvmStaticProvidesInObjectDetector", "FieldSiteTargetOnQualifierAnnotation", "ModuleCompanionObjects", "ModuleCompanionObjectsNotInModuleParent"
+    }
 }
 
 dependencies {
-
+testApi(project(":common"))
     implementation(project(":data:network"))
     implementation(project(":domain"))
 
     testImplementation libs.mockK
     testImplementation libs.bundles.unittest
+    testImplementation libs.json.convertor
+    testImplementation libs.json.serializer
+    testImplementation libs.bundles.unittest
+
+
 
 
 

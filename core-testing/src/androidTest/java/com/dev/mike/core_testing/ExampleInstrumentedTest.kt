@@ -1,10 +1,12 @@
-package dev.mike.network
+package com.dev.mike.core_testing
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Assert.* // ktlint-disable no-wildcard-imports
+import androidx.test.ext.junit.runners.AndroidJUnit4
+
 import org.junit.Test
 import org.junit.runner.RunWith
+
+import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -17,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("dev.mike.network.test", appContext.packageName)
+        assertEquals("com.dev.mike.core_testing.test", appContext.packageName)
     }
 }
