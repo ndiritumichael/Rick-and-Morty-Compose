@@ -43,7 +43,7 @@ https://user-images.githubusercontent.com/17760799/152310062-89872d22-d06e-4607-
 
 ## Prerequisite.
 
-In order to be able to build the application you'll need Android Studio Minimum version Android Studio Electric Eel Canary 5
+In order to be able to build the application you'll need Android Studio Minimum version Android Studio Chipmunk May Build
 
 
 ## Disclaimer.
@@ -125,6 +125,12 @@ The ```presentation``` layer contains components involved in showing information
 # Tech Stack.
 This project uses some of the popular libraries, plugins and tools of the android ecosystem.
 
+## DEPENDENCIES
+
+All the dependencies (external libraries) are defined in the single place - (libs.versions.toml)
+file using [Version Catalogs](https://docs.gradle.org/current/userguide/platforms.html). This approach allows to easily manage dependencies and use the same dependency version across
+all modules.
+
 ## Libraries.
 
 - [Hilt](https://dagger.dev/hilt/) - Dependency Injection library.
@@ -137,7 +143,7 @@ This project uses some of the popular libraries, plugins and tools of the androi
     
     -   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Designed to store and manage UI-related data in a lifecycle conscious way. The ViewModel class allows data to survive configuration changes such as screen rotations.
     
-    - [Navigation Component](https://developer.android.com/guide/navigation/navigation-getting-started) -Component that allows easier implementation of navigation from simple button clicks to more complex patterns.
+    - [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) -Component that allows easier implementation of navigation from composables.
 
 
 - [Retrofit](https://square.github.io/retrofit/) - Type-safe http client 
