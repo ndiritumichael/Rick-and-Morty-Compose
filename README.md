@@ -43,7 +43,7 @@ https://user-images.githubusercontent.com/17760799/152310062-89872d22-d06e-4607-
 
 ## Prerequisite.
 
-In order to be able to build the application you'll need Android Studio Minimum version Android Studio Electric Eel Canary 5
+In order to be able to build the application you'll need Android Studio Minimum version Android Studio Chipmunk May Build
 
 
 ## Disclaimer.
@@ -124,6 +124,12 @@ The ```presentation``` layer contains components involved in showing information
 
 # Tech Stack.
 This project uses some of the popular libraries, plugins and tools of the android ecosystem.
+
+## DEPENDENCIES
+
+All the dependencies (external libraries) are defined in the single place - (libs.versions.toml)
+file using [Version Catalogs](https://docs.gradle.org/current/userguide/platforms.html). This approach allows to easily manage dependencies and use the same dependency version across
+all modules.
 
 ## Libraries.
 
