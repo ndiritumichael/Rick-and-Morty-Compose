@@ -52,6 +52,11 @@ kotlinOptions {
     hilt {
         enableAggregatingTask = true
     }
+    lintOptions {
+        //lint error caused by using late init var in tests
+        //https://github.com/google/dagger/issues/3201
+        disable "JvmStaticProvidesInObjectDetector", "FieldSiteTargetOnQualifierAnnotation", "ModuleCompanionObjects", "ModuleCompanionObjectsNotInModuleParent"
+    }
 }
 
 
