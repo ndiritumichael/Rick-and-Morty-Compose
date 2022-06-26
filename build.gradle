@@ -1,29 +1,21 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext {
-        compose_version = '1.2.0-alpha02'
-        hilt_version = "2.40"
-        androidx_hilt = '1.0.0'
-        hilt_lifecycle = "1.0.0-alpha03"
-        retrofit = "2.9.0"
-        okhttp = "4.9.0"
-        kotlin_version = "1.6.10"
-        paging_version = "3.1.0"
-        paging_compose = "1.0.0-alpha14"
-        navigation_animation = "0.21.3-beta"
-        landscapist_coil="1.4.4"
-        accompanist = "0.24.1-alpha"
 
-    }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath libs.android.gradlePlugin
+        classpath libs.kotlin.gradlePlugin
+        classpath libs.kotlin.serializationPlugin
+
+        classpath libs.dagger.hilt.gradlePlugin
+
+
+
+        //https://youtrack.jetbrains.com/issue/IDEA-279603/Code-completion-for-Gradle-Version-Catalogs-in-groovy-build-files
+        classpath files(libs.class.superclass.protectionDomain.codeSource.location)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

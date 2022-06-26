@@ -1,11 +1,12 @@
 package dev.mike.ui_characters.characterList
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.rememberLazyGridState
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -44,7 +45,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
     var showColumn by remember {
         mutableStateOf(true)
     }
-  val layoutIcon =  if (showColumn)  Icons.Default.GridView else Icons.Default.List
+    val layoutIcon = if (showColumn) Icons.Default.GridView else Icons.Default.List
 
     val scope = rememberCoroutineScope()
 
@@ -96,7 +97,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                     ) {
                         Icon(
                             imageVector = Icons.Default.Search,
-                            contentDescription = null
+                            contentDescription = "search"
                         )
                         MediumSpacer()
                         Text(
@@ -108,15 +109,8 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                         )
                     }
 
-/* IconButton(
-                        modifier = Modifier
-                            .weight(9f)
-                            ,
-                        onClick = { searchScreen() }
-                    ) {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = null)
-                    }*/
                     IconButton(onClick = {
+
                         scope.launch {
 
                             when (showColumn) {
@@ -127,8 +121,8 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                                     lazyListState.scrollToItem(lazyGridState.firstVisibleItemIndex)
                                 }
                             }
-                            showColumn = showColumn.not()
                         }
+                        showColumn = showColumn.not()
                     }) {
                         Icon(imageVector = layoutIcon, contentDescription = null)
                     }
@@ -160,6 +154,7 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                             Icon(imageVector = Icons.Default.Search, contentDescription = null)
                         }
                         IconButton(onClick = {
+
                             scope.launch {
 
                                 when (showColumn) {
@@ -170,10 +165,11 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                                         lazyListState.scrollToItem(lazyGridState.firstVisibleItemIndex, lazyGridState.firstVisibleItemScrollOffset)
                                     }
                                 }
-                                showColumn = showColumn.not()
                             }
+
+                            showColumn = showColumn.not()
                         }) {
-                            Icon(imageVector = layoutIcon , contentDescription = null)
+                            Icon(imageVector = layoutIcon, contentDescription = null)
                         }
                         IconButton(onClick = {}) {
                             Icon(
@@ -187,7 +183,9 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            if (scrollOffset == 0f) {
+
+            AnimatedVisibility(visible = scrollOffset == 0f) {
+
                 FloatingActionButton(
                     onClick = {
                         scope.launch {
@@ -199,29 +197,35 @@ fun CharactersList(searchScreen: () -> Unit, navigate: (Int) -> Unit) {
                 ) {
                     Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
                 }
+//
+            }
                 /* IconButton(onClick = { scope.launch { lazyListState.animateScrollToItem(1) } }) {
                 Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
             }*/
-            }
         }
     ) {
+        Box(modifier = Modifier.padding(it)) {
 
-        if (state.errorMessage.isNotEmpty()) {
+            if (state.errorMessage.isNotEmpty()) {
 
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = state.errorMessage)
-            }
-        }
-
-        characters?.let { items ->
-
-            if (showColumn) {
-                CharactersListColumn(items = items, listState = lazyListState) { characterId ->
-                    navigate(characterId)
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = state.errorMessage)
                 }
-            } else {
-                CharacterListGrid(items = items, lazyGridState) { characterId ->
-                    navigate(characterId)
+            }
+
+            characters?.let { items ->
+
+                if (showColumn) {
+                    CharactersListColumn(items = items, listState = lazyListState) { characterId ->
+                        navigate(characterId)
+                    }
+                } else {
+                    CharacterListGrid(items = items, lazyGridState) { characterId ->
+                        navigate(characterId)
+                    }
                 }
             }
         }

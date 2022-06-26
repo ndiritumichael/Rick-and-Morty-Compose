@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         minSdk 21
-        targetSdk 31
+        targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -45,12 +45,17 @@ kotlinOptions {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion libs.versions.compose.version.get()
 
     }
 
     hilt {
         enableAggregatingTask = true
+    }
+    lintOptions {
+        //lint error caused by using late init var in tests
+        //https://github.com/google/dagger/issues/3201
+        disable "JvmStaticProvidesInObjectDetector", "FieldSiteTargetOnQualifierAnnotation", "ModuleCompanionObjects", "ModuleCompanionObjectsNotInModuleParent"
     }
 }
 
@@ -61,46 +66,52 @@ dependencies {
     api(project(":common-compose"))
     api(project(":common"))
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'androidx.activity:activity-compose:1.4.0'
-    implementation 'com.google.android.material:material:1.5.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation libs.androidx.lifecycle.runtime
+
+
+
 
     //compose
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+   implementation libs.androidx.compose.ui.tooling.preview
+    implementation libs.androidx.compose.ui.core
+
+    implementation libs.androidx.lifecycle.viewModelCompose
+    debugImplementation libs.androidx.compose.ui.tooling
+    debugImplementation libs.androidx.compose.ui.testManifest
+    debugImplementation libs.androidx.compose.ui.util
+
+
+   // composetest
+    testImplementation libs.junit4
+    testImplementation libs.turbine
+    testApi(project(":core-testing"))
+    androidTestImplementation libs.androidx.test.espresso.core
+    androidTestImplementation libs.androidx.test.junitexp
+    androidTestImplementation libs.androidx.compose.ui.test
+
+    testApi libs.androidx.test.core
+    testApi libs.androidx.test.rules
+
 
     //constraint
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0"
-
-
-    // Compose dependencies
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0"
+    implementation libs.androidx.compose.constraintlayout
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
 
     // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+   // implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
 
     //Dagger - Hilt
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
+    implementation libs.androidx.hilt.viewmodel
 
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
-    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+    kapt libs.androidx.hilt.compiler
+    implementation libs.androidx.hilt.compose
 
-    //compose paging
-    implementation "androidx.paging:paging-compose:$paging_compose"
+    //paging
+    implementation libs.androidx.paging.runtime
+    implementation libs.androidx.paging.compose
 
 
 

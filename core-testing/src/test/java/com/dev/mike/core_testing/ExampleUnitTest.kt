@@ -1,4 +1,4 @@
-package dev.mike.network
+package com.dev.mike.core_testing
 
 import org.junit.Test
 

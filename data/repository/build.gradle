@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         minSdk 21
-        targetSdk 31
+        targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -32,25 +32,33 @@ android {
     hilt {
         enableAggregatingTask = true
     }
+    lintOptions {
+        disable "JvmStaticProvidesInObjectDetector", "FieldSiteTargetOnQualifierAnnotation", "ModuleCompanionObjects", "ModuleCompanionObjectsNotInModuleParent"
+    }
 }
 
 dependencies {
-
-    api(project(":data:network"))
+testApi(project(":common"))
+    implementation(project(":data:network"))
     implementation(project(":domain"))
 
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    testImplementation libs.mockK
+    testImplementation libs.bundles.unittest
+    testImplementation libs.json.convertor
+    testImplementation libs.json.serializer
+    testImplementation libs.bundles.unittest
+
+
+
 
 
 
 
 
     // Dependency Injection
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
-    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
 
     //paging
-    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+   implementation libs.androidx.paging.runtime
 }

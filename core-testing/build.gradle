@@ -1,0 +1,58 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.dev.mike.core_testing'
+    compileSdk 32
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 32
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data:repository"))
+    api(project(":data:network"))
+    implementation(project(":common"))
+
+    debugImplementation libs.androidx.compose.ui.testManifest
+    debugImplementation libs.androidx.compose.ui.util
+
+
+    //test
+    testImplementation libs.junit4
+    testImplementation libs.turbine
+    androidTestImplementation libs.androidx.test.espresso.core
+    androidTestImplementation libs.androidx.test.junitexp
+    androidTestImplementation libs.androidx.compose.ui.test
+
+    testApi libs.androidx.test.core
+    testApi libs.androidx.test.rules
+    api(libs.kotlinx.testCoroutines)
+
+    implementation libs.json.serializer
+    implementation libs.json.convertor
+
+
+}

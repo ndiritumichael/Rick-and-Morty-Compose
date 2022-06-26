@@ -1,51 +1,38 @@
 package dev.mike.repository.datasources.episodes
 
-
-import android.os.Parcel
-import android.os.Parcelable
-import android.util.Log
 import dev.mike.domain.model.episodes.Episode
-
 import dev.mike.domain.repositories.episodes.SingleEpisodeRepository
-import dev.mike.network.ApiService
+import dev.mike.network.source.IEpisodesRepository
 import dev.mike.repository.mappers.toEpisode
 import dev.mike.repository.utils.BaseRepository
-
 import javax.inject.Inject
 
-class EpisodesRepositoryImpl @Inject constructor(private val apiService: ApiService) :
+class EpisodesRepositoryImpl @Inject constructor(private val repository: IEpisodesRepository) :
     SingleEpisodeRepository, BaseRepository() {
-
 
     override suspend fun getEpisode(episodeId: String): Result<List<Episode>> {
 
-
         return when {
 
-            //forced to this because when only one episode is passed the api returns an Episode Entity instead of a list.
-                //better implementations are welcomed
+            // forced to this because when only one episode is passed the api returns an Episode Entity instead of a list.
+            // better implementations are welcomed
 
             episodeId.length > 2 -> {
                 safeApiCall {
-                    apiService.getEpisode(episodeId).map { singleEpisodeDTO ->
+                    repository.getEpisode(episodeId).map { singleEpisodeDTO ->
                         singleEpisodeDTO.toEpisode()
-
                     }
                 }
-
             }
 
             else -> {
                 safeApiCall {
 
                     listOf(
-                        apiService.getoneEpisode(episodeId).toEpisode()
+                        repository.getoneEpisode(episodeId).toEpisode()
                     )
-
                 }
             }
         }
     }
 }
-
-

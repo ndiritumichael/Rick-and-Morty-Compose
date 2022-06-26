@@ -5,6 +5,7 @@
       <module name="Rick-and-Morty-Compose.app" target="11" />
       <module name="Rick-and-Morty-Compose.common-compose" target="11" />
       <module name="Rick-and-Morty-Compose.commons" target="11" />
+      <module name="Rick-and-Morty-Compose.core-testing" target="11" />
       <module name="Rick-and-Morty-Compose.data.network" target="11" />
       <module name="Rick-and-Morty-Compose.data.repository" target="11" />
       <module name="Rick-and-Morty-Compose.domain" target="11" />

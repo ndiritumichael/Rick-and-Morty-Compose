@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         applicationId "dev.mike.rickmortycompose"
         minSdk 21
-        targetSdk 31
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
@@ -46,7 +46,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion libs.versions.compose.version.get()
 
     }
     packagingOptions {
@@ -66,29 +66,44 @@ dependencies {
     implementation(project(":presentation:ui-episodes"))
     implementation(project(":presentation:ui-locations"))
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
-    implementation 'androidx.activity:activity-compose:1.4.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    //ui
+    implementation libs.androidx.lifecycle.runtime
+    implementation libs.androidx.lifecycle.viewModelCompose
 
-    // Dependency Injection
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
-    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
 
-    implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist"
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+    implementation libs.androidx.compose.ui.tooling.preview
+    implementation libs.androidx.compose.ui.core
+
+    implementation libs.androidx.core.splashscreen
+
+    implementation libs.design.material.'2'
+    implementation libs.design.material.general
+    testImplementation libs.junit4
+
+
+    androidTestImplementation libs.androidx.test.espresso.core
+    androidTestImplementation libs.androidx.test.junitexp
+
+    androidTestImplementation libs.androidx.compose.ui.test
+    debugImplementation libs.androidx.compose.ui.tooling
+    debugImplementation libs.androidx.compose.ui.testManifest
+    debugImplementation libs.androidx.compose.ui.util
+
+
+
+    //Dagger - Hilt
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
+
+
+    implementation libs.accompanist.navigation.animation
+    debugImplementation libs.leakCanary
 
     //splash screen
-    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+    implementation libs.androidx.core.splashscreen
 
 
 }

@@ -1,15 +1,15 @@
 package dev.mike.ui_characters.characterList
 
+import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.mike.domain.usecases.GetCharactersUseCase
-import dev.mike.ui_characters.characterList.CharacterListState
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,18 +26,22 @@ class CharactersListViewModel @Inject constructor(
             errorMessage = exception.message!!
         )
     }
-    val characterListState
+    val characterListState: State<CharacterListState>
         get() = _characterListState
     init {
         getCharacters()
     }
 
-    private fun getCharacters() = viewModelScope.launch(handler) {
+
+     fun getCharacters() = viewModelScope.launch(handler) {
+
         val response = getCharactersUseCase().cachedIn(viewModelScope)
-        //delay(1000)
-        // to show progressBar to be removed
+
+
+
         _characterListState.value = CharacterListState(
             dataList = response
         )
+
     }
 }
