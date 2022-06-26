@@ -143,7 +143,7 @@ all modules.
     
     -   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Designed to store and manage UI-related data in a lifecycle conscious way. The ViewModel class allows data to survive configuration changes such as screen rotations.
     
-    - [Navigation Component](https://developer.android.com/guide/navigation/navigation-getting-started) -Component that allows easier implementation of navigation from simple button clicks to more complex patterns.
+    - [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) -Component that allows easier implementation of navigation from composables.
 
 
 - [Retrofit](https://square.github.io/retrofit/) - Type-safe http client 
